@@ -23,6 +23,16 @@ Route::post('/register', function () {
     return "Registration Form";
 });
 
+
+// these may be on same "getting started" screen
+Route::get('/setup-instructions', function () {
+    return "Intro Instructions on Setup";  // will bring in instructions view
+});
+
+Route::get('/setup-settings', function () {
+    return "Intro Settings Form"; // will bring in settings view
+});
+
 Route::get('/settings', function () {
     return "Settings Form";
 });
@@ -49,6 +59,10 @@ Route::post('/game-board', function () {
 
 Route::get('/metrics', function () {
     return "Metrics";
+});
+
+Route::get('/faq', function () {
+    return "FAQ View";
 });
 
 Route::get('/debug', function() {
