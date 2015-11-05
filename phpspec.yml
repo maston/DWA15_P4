@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: LMG
+        psr4_prefix: LMG
+        src_path: app
