@@ -12,58 +12,47 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/register', function () {
-    return "Registration Form";
-});
+// Registration Routes
+Route::get('/register/create', 'Register@getCreate');
+Route::post('/register/create', 'Register@postCreate');
+Route::get('/register/intro', 'Register@getIntro');
+Route::get('/register/settings', 'Register@getSettings');
+Route::post('/register/settings', 'Register@postSettings');
 
-Route::post('/register', function () {
-    return "Registration Form";
-});
+// Settings Routes
+// Settings are created at registration these routes edit them.
+Route::get('/settings/{user_id}', 'Settings@show');
+Route::get('/settings/{user_id}/edit', 'Settings@edit');
+Route::put('/settings/{user_id}', 'Settings@update');
+Route::delete('/settings/{user_id}', 'Settings@destroy');
 
+// Grocery Run Routes
+Route::get('/grocery-runs/{user_id}', 'GroceryRuns@index');
+Route::get('/grocery-runs/create/{user_id}', 'GroceryRuns@create');
+Route::post('/grocery-runs', 'GroceryRuns@store');
+Route::get('/grocery-runs/{gr_id}', 'GroceryRuns@show');
+Route::get('/grocery-runs/{gr_id}/edit', 'GroceryRuns@edit');
+Route::put('/grocery-runs/{gr_id}', 'GroceryRuns@update');
+Route::delete('/grocery-runs/{gr_id}', 'GroceryRuns@destroy');
 
-// these may be on same "getting started" screen
-Route::get('/setup-instructions', function () {
-    return "Intro Instructions on Setup";  // will bring in instructions view
-});
+// Game Board Routes - manages meal counts
+Route::get('/game-board/{user_id}', 'GameBoard@index');
+Route::get('/game-board/create/{user_id}', 'GameBoard@create');
+Route::post('/game-board', 'GameBoard@store');
+Route::get('/game-board/{mc_id}', 'GameBoard@show');
+Route::get('/game-board/{mc_id}/edit', 'GameBoard@edit');
+Route::put('/game-board/{mc_id}', 'GameBoard@update');
+Route::delete('/game-board/{mc_id}', 'GameBoard@destroy');
 
-Route::get('/setup-settings', function () {
-    return "Intro Settings Form"; // will bring in settings view
-});
+// Metrics Routes
+Route::get('/metrics/{user_id}', 'Metrics@show');
 
-Route::get('/settings', function () {
-    return "Settings Form";
-});
+// FAQ Routes
+Route::get('/faqs', 'FAQs@index');
 
-Route::post('/settings', function () {
-    return "Settings Form";
-});
-
-Route::get('/grocery-runs', function () {
-    return "Grocery Run Form";
-});
-
-Route::post('/grocery-runs', function () {
-    return "Grocery Run Form";
-});
-
-Route::get('/game-board', function () {
-    return "The Gameboard";
-});
-
-Route::post('/game-board', function () {
-    return "Process The Gameboard";
-});
-
-Route::get('/metrics', function () {
-    return "Metrics";
-});
-
-Route::get('/faq', function () {
-    return "FAQ View";
-});
 
 Route::get('/debug', function() {
 
