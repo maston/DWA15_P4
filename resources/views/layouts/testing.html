@@ -9,7 +9,7 @@
 	<meta name="description" content="Game that helps you change your eating behaviors... etc..">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<!-- <link rel="stylesheet" href="css/lavish-bootstrap.css"> -->
-	<link rel="stylesheet" href="/css/site.css">
+	<link rel="stylesheet" href="testing-site.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
@@ -56,10 +56,14 @@
 </section>
 
 <main class="row">
-
-		{{-- Main page content will be yielded here --}}
-        @yield('content')
-
+	<div class="col-md-6">
+		<form class="settings-form">
+			the main view
+		</form>
+	</div>
+	<div class="col-md-6">
+		<p class="settings-info">instruction bubble</p>
+	</div>
 </main>
 
 

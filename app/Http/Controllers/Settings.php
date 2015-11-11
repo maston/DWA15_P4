@@ -48,7 +48,8 @@ class Settings extends Controller
      */
     public function show($id)
     {
-        //
+        return view('Settings.show');
+
     }
 
     /**
