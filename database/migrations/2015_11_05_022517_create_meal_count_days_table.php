@@ -15,14 +15,17 @@ class CreateMealCountDaysTable extends Migration
          Schema::create('meal_count_days', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('grocery_run_id');
-            $table->integer('user_id');
+            $table->integer('grocery_run_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->date('dt_meal_count');
             $table->integer('bfast_ct');
             $table->integer('lunch_ct');
             $table->integer('dinner_ct');
             $table->integer('coffee_ct');
-            $table->boolean('is_deleted');
+            $table->timestamp('deleted_at');
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('grocery_run_id')->references('id')->on('grocery_runs');
         });
     }
 
@@ -33,6 +36,11 @@ class CreateMealCountDaysTable extends Migration
      */
     public function down()
     {
+        Schema::table('meal_count_days', function (Blueprint $table) {
+            # ref: http://laravel.com/docs/5.1/migrations#dropping-indexes
+            $table->dropForeign('meal_count_days_user_id_foreign');
+            $table->dropForeign('meal_count_days_grocery_run_id_foreign');
+        });
         Schema::drop('meal_count_days');
     }
 }

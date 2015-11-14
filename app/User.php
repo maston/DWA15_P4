@@ -36,4 +36,16 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function grocery_run() {
+      # User has many Grocery Runs
+      # Define a one-to-many relationship.
+      return $this->hasMany('\LMG\GroceryRun');
+    }
+
+    public function meal_count_day() {
+      # User has many Meal Count Days
+      # Define a one-to-many relationship.
+      return $this->hasMany('\LMG\MealCountDay');
+    }
 }
