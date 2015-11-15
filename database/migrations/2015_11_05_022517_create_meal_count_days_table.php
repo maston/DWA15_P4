@@ -18,11 +18,11 @@ class CreateMealCountDaysTable extends Migration
             $table->integer('grocery_run_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->date('dt_meal_count');
-            $table->integer('bfast_ct');
-            $table->integer('lunch_ct');
-            $table->integer('dinner_ct');
-            $table->integer('coffee_ct');
-            $table->timestamp('deleted_at');
+            $table->integer('bfast_ct')->default(0);
+            $table->integer('lunch_ct')->default(0);
+            $table->integer('dinner_ct')->default(0);
+            $table->integer('coffee_ct')->default(0);
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('grocery_run_id')->references('id')->on('grocery_runs');

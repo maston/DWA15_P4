@@ -86,15 +86,10 @@ main {
     border-radius: 4px;
     margin-top: .25em;
     margin-bottom: .25em;
-    /*height: 300px;*/
-   /* height:100%;*/
-/*    position: absolute;
-    height:100%; 
-    width:100%;*/
 }
 
 .settings-form {
-    height:300px;
+    /*height:500px;*/
     background-color: #BBE3D7;
 
     margin-top: 1em;
@@ -103,9 +98,20 @@ main {
 }
 
 .settings-info {
-        height:300px;
+        /*height:500px;*/
     background-color: #BBE3D7;
     margin-top: 1em;
     margin-bottom: 1em;
     border-radius: 4px;
+}
+
+.flash_message {
+    width:100%;
+    text-align:center;
+    padding:5px;
+/*    position:fixed;
+    top:0;
+    left:0;*/
+    background-color:yellow;
+    font-weight:bold;
 }

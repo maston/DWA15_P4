@@ -16,7 +16,8 @@
 
 <body>
 <!-- begin bootstrap container -->
-<div class="container">
+<div class="container"> 
+
 
 <!--  begin header -->
 <header class="row">
@@ -33,13 +34,13 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	          <li class="active"><a href="#">Your Gameboard</a></li>
-	          <li class=""><a href="#">Grocery Runs</a></li>
-	          <li class=""><a href="#">Metrics</a></li>
+	          <li class= {{ $nav_gameboard }} ><a href="#">Your Gameboard</a></li>
+	          <li class= {{ $nav_grocery_run }} ><a href="#">Grocery Runs</a></li>
+	          <li class= {{ $nav_metrics }} ><a href="#">Metrics</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-			<li><p class="navbar-text navbar-right">Hello, Sarah <span class="glyphicon glyphicon-user"></span>  (<a href="#" class="navbar-link">logout</a>)</p>
+	        <li class= {{ $nav_settings }}><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+			<li><p class="navbar-text navbar-right">Hello, {{$user_info['name']}} <span class="glyphicon glyphicon-user"></span>  (<a href="#" class="navbar-link">logout</a>)</p>
             </li>
 	      </ul>
 <!-- <p class="navbar-text navbar-right">Signed in as Sarah.<a href="#" class="navbar-link">logout</a></p> -->
@@ -56,7 +57,11 @@
 </section>
 
 <main class="row">
-
+    @if(\Session::has('flash_message'))
+        <div class='flash_message'>
+            {{ \Session::get('flash_message') }}
+        </div>
+    @endif
 		{{-- Main page content will be yielded here --}}
         @yield('content')
 

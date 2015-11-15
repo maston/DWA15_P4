@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
         'name' => 'maston',
         'email' => 'maston@pantomath.com',
         'password' => 'abc123',
+        'zipcode' => '12345',
         ]);
         DB::table('users')->insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
@@ -24,6 +25,7 @@ class UsersTableSeeder extends Seeder
         'name' => 'jill',
         'email' => 'jill@harvard.edu',
         'password' => 'abc123',
+        'zipcode' => '12345',
         ]);
     }
 }

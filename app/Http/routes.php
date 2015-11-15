@@ -24,10 +24,10 @@ Route::post('/register/settings', 'Register@postSettings');
 
 // Settings Routes
 // Settings are created at registration these routes edit them.
-Route::get('/settings/{user_id}', 'Settings@show');
-Route::get('/settings/{user_id}/edit', 'Settings@edit');
-Route::put('/settings/{user_id}', 'Settings@update');
-Route::delete('/settings/{user_id}', 'Settings@destroy');
+// Route::get('/settings/{user_id}', 'Settings@show');
+Route::get('/settings/{id}', 'Settings@getEdit');
+Route::post('/settings', 'Settings@postEdit');
+// Route::delete('/settings/{user_id}', 'Settings@destroy');
 
 // Grocery Run Routes
 Route::get('/grocery-runs/{user_id}', 'GroceryRuns@index');

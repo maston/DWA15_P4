@@ -17,10 +17,10 @@ class CreateGroceryRunsTable extends Migration
             $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->date('dt_grocery_run');
-            $table->integer('total_amt');
-            $table->integer('food_amt');
-            $table->integer('non_food_amt');
-            $table->timestamp('deleted_at');
+            $table->integer('total_amt')->default(0);
+            $table->integer('food_amt')->default(0);
+            $table->integer('non_food_amt')->default(0);
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
         });
