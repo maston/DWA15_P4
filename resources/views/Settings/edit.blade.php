@@ -16,7 +16,7 @@
     		<input type="number" name="lunch_spend" id="lunch_spend" class="input-num-parameter"  value="{{ old('lunch_spend',$user_info['lunch_spend']) }}"> 
     		<br>
     		<label for="dinner_spend">Dinner Spend (in $) :</label>
-    		<input type="number" name="dinner_spend" id="lunch_spend" class="input-num-parameter"  value="{{ old('dinner_spend',$user_info['dinner_spend']) }}"> 
+    		<input type="number" name="dinner_spend" id="dinner_spend" class="input-num-parameter"  value="{{ old('dinner_spend',$user_info['dinner_spend']) }}"> 
     		<br>
     		<label for="coffee_spend">Coffee Spend (in $) :</label>
     		<input type="number" name="coffee_spend" id="coffee_spend" class="input-num-parameter" value="{{ old('coffee_spend',$user_info['coffee_spend']) }}"> 

@@ -30,20 +30,28 @@ Route::post('/settings', 'Settings@postEdit');
 // Route::delete('/settings/{user_id}', 'Settings@destroy');
 
 // Grocery Run Routes
-Route::get('/grocery-runs/{user_id}', 'GroceryRuns@index');
-Route::get('/grocery-runs/create/{user_id}', 'GroceryRuns@create');
-Route::post('/grocery-runs', 'GroceryRuns@store');
-Route::get('/grocery-runs/{gr_id}', 'GroceryRuns@show');
-Route::get('/grocery-runs/{gr_id}/edit', 'GroceryRuns@edit');
-Route::put('/grocery-runs/{gr_id}', 'GroceryRuns@update');
-Route::delete('/grocery-runs/{gr_id}', 'GroceryRuns@destroy');
+Route::get('/grocery-runs/{id}', 'GroceryRuns@index');
+Route::get('/grocery-runs/create/{id}', 'GroceryRuns@getCreate');
+Route::post('/grocery-runs/create', 'GroceryRuns@postCreate');
+Route::get('/grocery-runs/edit/{id}', 'GroceryRuns@getEdit');
+Route::post('/grocery-runs/edit', 'GroceryRuns@postEdit');
+
+// Route::post('/grocery-runs', 'GroceryRuns@store');
+// Route::get('/grocery-runs/{gr_id}', 'GroceryRuns@show');
+
+// Route::put('/grocery-runs/{gr_id}', 'GroceryRuns@update');
+// Route::delete('/grocery-runs/{gr_id}', 'GroceryRuns@destroy');
 
 // Game Board Routes - manages meal counts
-Route::get('/game-board/{user_id}', 'GameBoard@index');
-Route::get('/game-board/create/{user_id}', 'GameBoard@create');
+Route::get('/game-board/{id}', 'GameBoard@index'); //load user GB to current GR with MCs
+Route::post('/game-board/create', 'GameBoard@postCreate'); //Add a new MC
+Route::get('/game-board/edit/{id}', 'GameBoard@getEdit');  //Edit a MC from Grid
+Route::post('/game-board/edit', 'GameBoard@postEdit');  //Update a MC from Grid
+
+
+
 Route::post('/game-board', 'GameBoard@store');
 Route::get('/game-board/{mc_id}', 'GameBoard@show');
-Route::get('/game-board/{mc_id}/edit', 'GameBoard@edit');
 Route::put('/game-board/{mc_id}', 'GameBoard@update');
 Route::delete('/game-board/{mc_id}', 'GameBoard@destroy');
 

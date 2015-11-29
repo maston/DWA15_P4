@@ -39,60 +39,7 @@
   <div class="col-md-6">
   	<h3>Grocery Run Summary</h3>
     <div class="settings-info">
-    <table border="1">
-        <caption>Meal Counts For This Grocery Run</caption>
-        <tr>
-            <th>Date of Meals</th>
-            <th>Breakfasts</th>
-            <th>Lunches</th>
-            <th>Dinners</th>
-            <th>Coffees</th>
-        </tr>
-    @foreach($user_meal_counts as $meal_count_day)
-        <tr>
-            <td><a href="/grocery-runs/edit/{{$user_grocery_run['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
-            <td>{{ $meal_count_day['bfast_ct'] }}</td> 
-            <td>{{ $meal_count_day['lunch_ct'] }}</td>
-            <td>{{ $meal_count_day['dinner_ct'] }}</td>
-            <td>{{ $meal_count_day['coffee_ct'] }}</td>
-        </tr>
-    @endforeach
-    	<tr>
-    		<td>Totals</td>
-    		<td>#</td>
-    		<td>#</td>
-    		<td>#</td>
-    		<td>#</td>
-    	</tr>
-    </table>
-
-     <table border="1">
-        <caption>Savings For This Grocery Run</caption>
-        <tr>
-            <th>Date of Meals</th>
-            <th>Breakfasts</th>
-            <th>Lunches</th>
-            <th>Dinners</th>
-            <th>Coffees</th>
-        </tr>
-    @foreach($user_meal_counts as $meal_count_day)
-        <tr>
-            <td><a href="/grocery-runs/edit/{{$user_grocery_run['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
-            <td>{{ $meal_count_day['bfast_ct'] * $user_info['bfast_spend']}}</td> 
-            <td>{{ $meal_count_day['lunch_ct'] * $user_info['lunch_spend'] }}</td>
-            <td>{{ $meal_count_day['dinner_ct'] * $user_info['dinner_spend'] }}</td>
-            <td>{{ $meal_count_day['coffee_ct'] * $user_info['coffee_spend'] }}</td>
-        </tr>
-    @endforeach
-    	<tr>
-    		<td>Totals</td>
-    		<td>#</td>
-    		<td>#</td>
-    		<td>#</td>
-    		<td>#</td>
-    	</tr>
-    </table>
-    <a href="#"> Go to Metrics</a>
+     <p> start counting meals towards this grocery run! </p>
     </div>
   </div>
 <!-- end main content section -->

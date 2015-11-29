@@ -84,7 +84,7 @@ class Settings extends Controller
      */
     public function postEdit(Request $request)
     {
-        // var_dump($request);
+
          // Validation
         $user_info = \LMG\User::find($request['user_id']);
         $user_info->bfast_spend = $request->bfast_spend;
@@ -93,7 +93,7 @@ class Settings extends Controller
         $user_info->coffee_spend = $request->coffee_spend;
         $user_info->zipcode = $request->zipcode;
         $user_info->save();
-        // return $user_info;
+
         \Session::flash('flash_message','Your settings were updated.');
         return redirect('/settings/'.$user_info->id);
     }
