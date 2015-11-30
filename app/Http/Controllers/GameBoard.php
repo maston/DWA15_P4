@@ -9,61 +9,62 @@ use LMG\Http\Controllers\Controller;
 
 class GameBoard extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id)
+    public function index()
     {
-        $nav_gameboard = 'active';
-        $nav_settings = '';
-        $nav_grocery_run = '';
-        $nav_metrics = '';
-        $user_info = \LMG\User::find($id);
-        $user_grocery_run = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $id)->first(); 
-        $user_meal_counts = \LMG\MealCountDay::orderBy('dt_meal_count','DESC')->where('grocery_run_id', '=', $user_grocery_run->id)->get(); 
-        $new_board = empty($user_meal_counts);
-        // dump($user_info);
-        // dump($user_grocery_run);
-        // dump($user_meal_counts);
-        // dump($new_board);
-        if($new_board) {
-            return view('GameBoard.new')
-            ->with('user_grocery_run', $user_grocery_run)
-            ->with('user_info', $user_info)
-            ->with('nav_gameboard', $nav_gameboard)
-            ->with('nav_settings', $nav_settings)
-            ->with('nav_grocery_run', $nav_grocery_run)
-            ->with('nav_metrics', $nav_metrics);
+
+
+        $user_info = \Auth::user();
+        // $user_grocery_run = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->first(); 
+        // $user_grocery_run = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
+        // $user_meal_counts = \LMG\MealCountDay::with('GroceryRuns')->orderBy('dt_meal_count','DESC')->where('grocery_run_id', '=', $user_grocery_run->id)->get(); 
+        $user_grocery_run = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
+
+        //check if there is a grocery run, if not --> go to grocery run screen?
+
+        //get dropdown list of grocery run dates
+        $grocery_run_for_dropdown = [];
+        foreach($user_grocery_run as $grocery_run) {
+            $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
         }
-        else {
-            return view('GameBoard.index')
+      
+        //get most recent grocery run (if we are doing show() then we get the selected grocery run)
+        $most_recent_grocery_run = $user_grocery_run->first();
+
+        // dump($most_recent_grocery_run_dt);
+
+        // $user_meal_counts = \LMG\MealCountDay::orderBy('dt_meal_count','DESC')->where('grocery_run_id', '=', $user_grocery_run->id)->get(); 
+        $new_board = empty($user_grocery_run);
+
+        return view('GameBoard.index')
             ->with('user_grocery_run', $user_grocery_run)
+            ->with('grocery_run_for_dropdown', $grocery_run_for_dropdown)
+            ->with('most_recent_grocery_run', $most_recent_grocery_run)
             ->with('user_info', $user_info)
-            ->with('user_meal_counts', $user_meal_counts)
-            ->with('nav_gameboard', $nav_gameboard)
-            ->with('nav_settings', $nav_settings)
-            ->with('nav_grocery_run', $nav_grocery_run)
-            ->with('nav_metrics', $nav_metrics)
-            ->with('new_board', $new_board);
-        }
+            ->with('new_board', $new_board); 
+
+        // if($new_board) {
+        //     dump($user_grocery_run->toArray());
+        //     return view('GameBoard.new')
+        //     ->with('user_grocery_run', $user_grocery_run)
+        //     ->with('user_info', $user_info);
+        // }
+        // else {
+        //     return view('GameBoard.index')
+        //     ->with('user_grocery_run', $user_grocery_run)
+        //     ->with('user_info', $user_info)
+        //     ->with('new_board', $new_board);            // ->with('user_meal_counts', $user_meal_counts)
+        // }
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function postCreate(Request $request)
     {
         // dump($request);
-        $nav_gameboard = 'active';
-        $nav_settings = '';
-        $nav_grocery_run = '';
-        $nav_metrics = '';
-        $user = \LMG\User::find($request['user_id']);
+        // $nav_gameboard = 'active';
+        // $nav_settings = '';
+        // $nav_grocery_run = '';
+        // $nav_metrics = '';
+        $user = \Auth::user();
         $grocery_run = \LMG\GroceryRun::find($request['grocery_run_id']);
 
 
@@ -78,7 +79,7 @@ class GameBoard extends Controller
         $meal_count_day->save();
 
         \Session::flash('flash_message','Your meal counts were saved.');
-        return redirect('/game-board/'.$grocery_run->user_id);
+        return redirect('/game-board');
     }
 
     /**
@@ -98,9 +99,79 @@ class GameBoard extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function postShow(Request $request)
     {
-        //
+        $user_info = \Auth::user();
+        // $user_grocery_run = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->first(); 
+        // $user_grocery_run = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
+        // $user_meal_counts = \LMG\MealCountDay::with('GroceryRuns')->orderBy('dt_meal_count','DESC')->where('grocery_run_id', '=', $user_grocery_run->id)->get(); 
+        $user_grocery_runs = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
+
+        //check if there is a grocery run, if not --> go to grocery run screen?
+
+        //get dropdown list of grocery run dates
+        $grocery_run_for_dropdown = [];
+        foreach($user_grocery_runs as $grocery_run) {
+            $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
+        }
+      
+        //get most recent grocery run (if we are doing show() then we get the selected grocery run)
+        $selected_grocery_run = $user_grocery_runs->find($request->grocery_run_id);
+        
+        $selected_meal_count_day = [];
+        // if(isset($request->meal_count_day_dt)) {
+            //need to figure out if the current day has an existing meal count
+        // }
+        // else {
+            //set the selected meal count to the date selected.
+            // $selected_meal_count_day = 
+
+            // \DB::select("SELECT * FROM meal_count_days WHERE grocery_run_id = " & $request->grocery_run_id);
+                    // $selected_meal_count_day = \DB::table('meal_count_days')
+        //              ->select(\DB::raw('*'))
+        //              ->where('grocery_run_id', '=', $request->grocery_run_id)
+        //              ->get();
+        // }
+        // dump($selected_meal_count_day);
+
+        // $selected_meal_count_day = 
+        // $books = DB::select("SELECT * FROM books WHERE author LIKE '%Scott%'");
+        // if (isset($request->meal_count_day_id)) {
+        //     $selected_meal_count_day = $user_grocery_runs->meal_count_day->find($request->meal_count_day_id);
+        //     dump ($selected_meal_count_day);
+        // }
+        // $user_meal_counts = $user_grocery_runs->meal_count_day->find($request->grocery_run_id);
+        // dump($most_recent_grocery_run_dt);
+        // orderBy('dt_meal_count','DESC')->where
+
+        // $user_meal_counts = $user_grocery_run->filter('grocery_run_id', $user_grocery_run->id); 
+        // $user_meal_counts = [];
+        // foreach ($user_grocery_runs as $user_grocery_run) {
+        //     foreach ($user_grocery_run->meal_count_day as $meal_count_day) {
+
+        //         echo 'Bfast count: '.$meal_count_day->bfast_ct.' ,';
+        //         echo 'Lunch count: '.$meal_count_day->lunch_ct.' ,';
+        //     }
+        // });
+        // dump($user_grocery_runs);
+
+        // foreach ($user_grocery_runs as $user_grocery_run) {
+        //     // echo '<br>'.$user_grocery_run->dt_grocery_run.' grocery run has following meal counts: ';
+        //     foreach ($user_grocery_run->meal_count_day as $meal_count_day) {
+        //         echo 'Bfast count: '.$meal_count_day->bfast_ct.' ,';
+        //         echo 'Lunch count: '.$meal_count_day->lunch_ct.' ,';
+        //     }
+        // }
+        // $new_board = empty($user_grocery_run);
+        // echo $request;
+        // dump($selected_grocery_run->toArray());
+
+        return view('GameBoard.show')
+            ->with('user_grocery_runs', $user_grocery_runs)
+            ->with('grocery_run_for_dropdown', $grocery_run_for_dropdown)
+            ->with('selected_grocery_run', $selected_grocery_run)
+            ->with('selected_meal_count_day', $selected_meal_count_day)
+            ->with('user_info', $user_info); 
     }
 
     /**

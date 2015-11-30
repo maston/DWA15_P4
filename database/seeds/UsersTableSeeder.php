@@ -11,21 +11,22 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-        'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'name' => 'maston',
-        'email' => 'maston@pantomath.com',
-        'password' => 'abc123',
-        'zipcode' => '12345',
-        ]);
-        DB::table('users')->insert([
-        'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'name' => 'jill',
-        'email' => 'jill@harvard.edu',
-        'password' => 'abc123',
-        'zipcode' => '12345',
-        ]);
+        $user = \LMG\User::firstOrCreate(['email' => 'maston@pantomath.com']);
+        $user->name = 'maston';
+        $user->email = 'maston@pantomath.com';
+        $user->password = \Hash::make('abc123');
+        $user->save();
+
+        $user = \LMG\User::firstOrCreate(['email' => 'jill@harvard.edu']);
+        $user->name = 'Jill';
+        $user->email = 'jill@harvard.edu';
+        $user->password = \Hash::make('helloworld');
+        $user->save();
+
+        $user = \LMG\User::firstOrCreate(['email' => 'jamal@harvard.edu']);
+        $user->name = 'Jamal';
+        $user->email = 'jamal@harvard.edu';
+        $user->password = \Hash::make('helloworld');
+        $user->save();
     }
 }

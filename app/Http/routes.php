@@ -11,26 +11,53 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', function(){
+    if(Auth::check()) {
+    // $user_info = \Auth::user();
+    // return view('GameBoard.index')
+    //     ->with('user_info', $user_info);
+    return redirect('/game-board');
+    }
+    else {
+        return view('home');
+    }
 });
 
-// Registration Routes
-Route::get('/register/create', 'Register@getCreate');
-Route::post('/register/create', 'Register@postCreate');
-Route::get('/register/intro', 'Register@getIntro');
-Route::get('/register/settings', 'Register@getSettings');
-Route::post('/register/settings', 'Register@postSettings');
 
-// Settings Routes
-// Settings are created at registration these routes edit them.
-// Route::get('/settings/{user_id}', 'Settings@show');
-Route::get('/settings/{id}', 'Settings@getEdit');
-Route::post('/settings', 'Settings@postEdit');
+// Authentication Routes
+Route::get('/login', 'Auth\AuthController@getLogin');
+Route::post('/login', 'Auth\AuthController@postLogin');
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+
+// Registration Routes
+Route::get('/register', 'Auth\AuthController@getRegister');
+Route::post('/register', 'Auth\AuthController@postRegister');
+
+// Route Group
+Route::group(['middleware' => 'auth'], function() {
+    //Settings Routes
+    Route::get('/settings', 'Settings@getEdit');
+    Route::post('/settings', 'Settings@postEdit');
+
+    // Game Board Routes - manages meal counts
+    Route::get('/game-board', 'GameBoard@index'); //load user GB to current GR with MCs
+    Route::post('/game-board', 'GameBoard@postShow');
+
+    Route::post('/game-board/create', 'GameBoard@postCreate'); //Add a new MC
+    Route::get('/game-board/edit', 'GameBoard@getEdit');  //Edit a MC from Grid
+    Route::post('/game-board/edit', 'GameBoard@postEdit');  //Update a MC from Grid
+
+    // Grocery Run Routes
+    Route::get('/grocery-runs', 'GroceryRuns@index');
+
+    // Metrics Routes
+    Route::get('/metrics', 'Metrics@show');
+
+});
 // Route::delete('/settings/{user_id}', 'Settings@destroy');
 
-// Grocery Run Routes
-Route::get('/grocery-runs/{id}', 'GroceryRuns@index');
+// Route::get('/grocery-runs', 'GroceryRuns@index');
 Route::get('/grocery-runs/create/{id}', 'GroceryRuns@getCreate');
 Route::post('/grocery-runs/create', 'GroceryRuns@postCreate');
 Route::get('/grocery-runs/edit/{id}', 'GroceryRuns@getEdit');
@@ -42,21 +69,12 @@ Route::post('/grocery-runs/edit', 'GroceryRuns@postEdit');
 // Route::put('/grocery-runs/{gr_id}', 'GroceryRuns@update');
 // Route::delete('/grocery-runs/{gr_id}', 'GroceryRuns@destroy');
 
-// Game Board Routes - manages meal counts
-Route::get('/game-board/{id}', 'GameBoard@index'); //load user GB to current GR with MCs
-Route::post('/game-board/create', 'GameBoard@postCreate'); //Add a new MC
-Route::get('/game-board/edit/{id}', 'GameBoard@getEdit');  //Edit a MC from Grid
-Route::post('/game-board/edit', 'GameBoard@postEdit');  //Update a MC from Grid
+// Route::post('/game-board', 'GameBoard@store');
+// Route::get('/game-board/{mc_id}', 'GameBoard@show');
+// Route::put('/game-board/{mc_id}', 'GameBoard@update');
+// Route::delete('/game-board/{mc_id}', 'GameBoard@destroy');
 
 
-
-Route::post('/game-board', 'GameBoard@store');
-Route::get('/game-board/{mc_id}', 'GameBoard@show');
-Route::put('/game-board/{mc_id}', 'GameBoard@update');
-Route::delete('/game-board/{mc_id}', 'GameBoard@destroy');
-
-// Metrics Routes
-Route::get('/metrics/{user_id}', 'Metrics@show');
 
 // FAQ Routes
 Route::get('/faqs', 'FAQs@index');
@@ -96,3 +114,42 @@ Route::get('/debug', function() {
     echo '</pre>';
 
 });
+
+
+
+// Route::get('/practice', function() {
+// $id=1;
+// $user_meal_counts = \LMG\MealCountDay::with('grocery_run')->orderBy('dt_meal_count','DESC')->where('user_id', '=', $id)->get(); 
+// dump($user_meal_counts->toArray());
+// $user_grocery_run = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $id)->get();
+// dump($user_grocery_run->toArray());
+//         $grocery_run_for_dropdown = [];
+//         foreach($user_grocery_run as $grocery_run) {
+//             $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
+//         }
+// dump($grocery_run_for_dropdown);
+// });
+
+
+Route::get('/practice', function() {
+    $user_grocery_runs = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', 1)->get();
+
+    foreach ($user_grocery_runs as $user_grocery_run) {
+        echo '<br>'.$user_grocery_run->dt_grocery_run.' grocery run has following meal counts: ';
+        foreach ($user_grocery_run->meal_count_day as $meal_count_day) {
+            echo 'Bfast count: '.$meal_count_day->bfast_ct.' ,';
+            echo 'Lunch count: '.$meal_count_day->lunch_ct.' ,';
+        }
+    }
+ });
+
+
+
+
+
+
+
+
+
+
+

@@ -1,34 +1,12 @@
-/* Sticky footer styles
-http://getbootstrap.com/examples/sticky-footer-navbar/
--------------------------------------------------- */
-/*html {
-  position: relative;
-  min-height: 100%;
-}*/
-/*body {
-   Margin bottom by footer height 
-  margin-bottom: 60px;
-}*/
-/*.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-   Set the fixed height of the footer here 
-  height: 60px;
-   height: 10vh; 
-  background-color: #9C9C9C;
-}*/
 
 /* begin general styles for site */
 footer { 
-    background-color:#35324E; /* dark purpley blue */
-    border-radius:4px;
-    margin-top: 0px;
+  border-radius:4px;
+  margin-top: 0px;
 }
 
 footer #footer-copyright {
-    color: #A79560; /* beige */
-    text-align: center;     
+  text-align: center;     
 }
 /* Custom page CSS
 -------------------------------------------------- */
@@ -57,10 +35,6 @@ code {
     margin-bottom: 0px;
 }
 
-/*.navbar-text .navbar-right {
-    padding-right: 15px;
-}*/
-
 .kpi-bar {
     background-color: #222222;
     border-top-color: #4F7A30;
@@ -71,61 +45,207 @@ code {
 }
 
 .kpi-bar .kpi-total-save {
-    color: #fff;
+    color: #617992;
 }
 
 .kpi-global-total-save {
     float:right;
-    color: #fff;
+    color: #617992;
 }
 
 .grocery-run-bar {
-    background-color: #222222;
-    border-top-color: #4F7A30;
-    border-top-width: 2px;
-    border-top-style: solid;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+   /* background-color: rgba(42, 34, 109, 0.78);*/
+    /*height: 50px;*/
+    margin-top: .25em;
+    border-radius: 4px;
+    border: solid 2px white;
 }
 
 .grocery-run-bar .grocery-run-deets {
-    color: white;
+    color: black;
+    margin-top: 0;
 }
 
-/*#wrap { background: gray; position: absolute; bottom: 20px; top: 20px; right: 100px; left: 100px }
-#wrap .content { height: 100% }*/
-
 main {
-    background-color: #50686A;
     border-radius: 4px;
     margin-top: .25em;
     margin-bottom: .25em;
 }
 
+/* SETTINGS VIEW */
+/* settings form section */
 .settings-form {
-    /*height:500px;*/
-    background-color: #BBE3D7;
-
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border-radius: 4px;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
 }
 
+.settings-form legend {
+  background: #35324F;
+  border-radius: 4px;
+  color: white;
+  padding-left: .25em;
+}
+
+.settings-form span {
+  font-style: italic;
+}
+
+.settings-save-btn {
+  margin-top:1em;
+  margin-bottom:1em;
+}
+
+/* settings info section */
 .settings-info {
-        /*height:500px;*/
-    background-color: #BBE3D7;
-    margin-top: 1em;
-    margin-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: solid 1px;
+  padding-left: .25em;
+  padding-right: .25em;
+  padding-bottom: 1em;
+}
+
+.settings-info h3 {
+  margin-top:0px;
+}
+
+.settings-info-defaulted {
+  font-style: italic;
+}
+
+.settings-info-takeout-img {
+  float:left;
+  border-radius: 4px;
+  padding: 0 .5em;
+}
+
+.settings-info-earth-img {
+    float:right;
     border-radius: 4px;
+    padding:.5em;
+}
+
+.settings-info-text {
+  padding-left: .75em
+}
+
+.settings-info-header {
+  padding-left: .25em
+}
+
+.clear-all {
+  clear:both;
 }
 
 .flash_message {
-    width:100%;
-    text-align:center;
-    padding:5px;
-/*    position:fixed;
-    top:0;
-    left:0;*/
-    background-color:yellow;
-    font-weight:bold;
+  width:35%;
+  margin-right:auto;
+  margin-left:auto;
+  display:block;
+  text-align:center;
+  padding:5px;
+  border-radius: 5px;
+  background-color:#D66100;
+  color:white;
 }
+
+
+/* 11.24.2015 */
+
+
+.login-form {
+      width: 50%;
+    margin: auto;
+        background: gray;
+        margin-bottom: 2em;
+}
+
+.login-logo {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.login-heading {
+    font-size: 40px;
+    line-height: 1em;
+    text-align: center;
+}
+
+.login-form-inputs {
+      padding-left: 2em;
+    padding-right: 2em;
+}
+
+.login-submit {
+    float:right;
+}
+
+.login-panel-footer {
+  clear: both;
+}
+
+.register-submit {
+      margin-bottom: 15px;
+      float:right;
+}
+
+.carton-reverse-img {
+    background-image: url(/img/cartonReverse.svg);
+    height:300px;
+    background-size: 75%;
+    background-repeat: no-repeat;
+    margin-top: 2em;
+}
+.peeps-img {
+  background-image: url(/img/peeps.svg);
+  height:100px;
+  background-repeat: no-repeat;
+  float:left;
+}
+
+.registration-intro {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+.registration-intro-button {
+  float:right;
+  margin-bottom: .5em;
+}
+
+.input-group .form-control  {
+  width:125px;
+}
+
+.meal-count-form {
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+}
+
+.meal-count-form legend {
+  background: #35324F;
+  border-radius: 4px;
+  color: white;
+  padding-left: .25em;
+}
+
+.meal-count-form span {
+  font-style: italic;
+}
+
+.meal-count-save-btn {
+  margin-top:1em;
+  margin-bottom:1em;
+}
+
+

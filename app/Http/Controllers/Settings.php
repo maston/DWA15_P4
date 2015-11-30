@@ -9,70 +9,19 @@ use LMG\Http\Controllers\Controller;
 
 class Settings extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return view('Settings.show');
-
-    }
-
-    /**
+        /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getEdit($id)
+    public function getEdit()
     {
-        $nav_gameboard = '';
-        $nav_settings = 'active';
-        $nav_grocery_run = '';
-        $nav_metrics = '';
-
-        $user_info = \LMG\User::find($id);
+        $user_info = \Auth::user();
 
         return View('Settings.edit')
-            ->with('user_info', $user_info)
-            ->with('nav_gameboard', $nav_gameboard)
-            ->with('nav_settings', $nav_settings)
-            ->with('nav_grocery_run', $nav_grocery_run)
-            ->with('nav_metrics', $nav_metrics);
+            ->with('user_info', $user_info);
     }
 
     /**
@@ -86,7 +35,7 @@ class Settings extends Controller
     {
 
          // Validation
-        $user_info = \LMG\User::find($request['user_id']);
+        $user_info = \Auth::user();
         $user_info->bfast_spend = $request->bfast_spend;
         $user_info->lunch_spend = $request->lunch_spend;
         $user_info->dinner_spend = $request->dinner_spend;
@@ -95,8 +44,53 @@ class Settings extends Controller
         $user_info->save();
 
         \Session::flash('flash_message','Your settings were updated.');
-        return redirect('/settings/'.$user_info->id);
+        return redirect('/settings');
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function index()
+    // {
+    //     //
+    // }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function create()
+    // {
+    //     //
+    // }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    // public function show($id)
+    // {
+    //     return view('Settings.show');
+
+    // }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -104,8 +98,8 @@ class Settings extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }

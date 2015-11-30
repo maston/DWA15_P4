@@ -9,14 +9,15 @@
 	<meta name="description" content="Game that helps you change your eating behaviors... etc..">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<!-- <link rel="stylesheet" href="css/lavish-bootstrap.css"> -->
-	<link rel="stylesheet" href="testing-site.css">
+	<link rel="stylesheet" href="/css/site.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 <!-- begin bootstrap container -->
-<div class="container">
+<div class="container"> 
+
 
 <!--  begin header -->
 <header class="row">
@@ -33,13 +34,13 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	          <li class="active"><a href="#">Your Gameboard</a></li>
-	          <li class=""><a href="#">Grocery Runs</a></li>
-	          <li class=""><a href="#">Metrics</a></li>
+	          <li class= {{ $nav_gameboard }} ><a href="/game-board/{{$user_info->id}}">Your Gameboard</a></li>
+	          <li class= {{ $nav_grocery_run }} ><a href="/grocery-runs/{{$user_info->id}}">Grocery Runs</a></li>
+	          <li class= {{ $nav_metrics }} ><a href="#">Metrics</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-			<li><p class="navbar-text navbar-right">Hello, Sarah <span class="glyphicon glyphicon-user"></span>  (<a href="#" class="navbar-link">logout</a>)</p>
+	        <li class= {{ $nav_settings }}><a href="/settings/{{$user_info->id}}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+			<li><p class="navbar-text navbar-right">Hello, {{$user_info['name']}} <span class="glyphicon glyphicon-user"></span>  (<a href="#" class="navbar-link">logout</a>)</p>
             </li>
 	      </ul>
 <!-- <p class="navbar-text navbar-right">Signed in as Sarah.<a href="#" class="navbar-link">logout</a></p> -->
@@ -50,20 +51,20 @@
 <!--  end header -->
 <section class="row kpi-bar">
 	<div class="col-md-12">
-		<span class="kpi-total-save">Total You've Saved : a number</span>
+		<span class="kpi-total-save">Total You've Saved Playing LMG : a number</span>
 		<span class="kpi-global-total-save">All Players : some other number</span>
 	</div>
 </section>
 
 <main class="row">
-	<div class="col-md-6">
-		<form class="settings-form">
-			the main view
-		</form>
-	</div>
-	<div class="col-md-6">
-		<p class="settings-info">instruction bubble</p>
-	</div>
+    @if(\Session::has('flash_message'))
+        <div class='flash_message'>
+            {{ \Session::get('flash_message') }}
+        </div>
+    @endif
+		{{-- Main page content will be yielded here --}}
+        @yield('content')
+
 </main>
 
 

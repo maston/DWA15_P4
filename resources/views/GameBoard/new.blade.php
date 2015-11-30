@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('nav')
+  @include('layouts.nav', [$nav_gameboard = 'active', $nav_grocery_run = '', $nav_metrics = '', $nav_settings = '', $nav_register = '', $nav_login = ''])
+@stop
+
 @section('content')
 <section class="row grocery-run-bar">
 	<div class="col-md-12">

@@ -14,22 +14,18 @@ class GroceryRuns extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $nav_gameboard = '';
-        $nav_settings = '';
-        $nav_grocery_run = 'active';
-        $nav_metrics = '';
-        $user_info = \LMG\User::find($id);
-        $user_grocery_runs = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $id)->get(); 
-            
+        // $nav_gameboard = '';
+        // $nav_settings = '';
+        // $nav_grocery_run = 'active';
+        // $nav_metrics = '';
+        $user_info = \Auth::user();
+        $user_grocery_runs = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get(); 
+         // dump($user_info);   
         return view('GroceryRuns.index')
             ->with('user_grocery_runs', $user_grocery_runs)
-            ->with('user_info', $user_info)
-            ->with('nav_gameboard', $nav_gameboard)
-            ->with('nav_settings', $nav_settings)
-            ->with('nav_grocery_run', $nav_grocery_run)
-            ->with('nav_metrics', $nav_metrics);
+            ->with('user_info', $user_info);
     }
 
     /**
