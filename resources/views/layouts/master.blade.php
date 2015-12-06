@@ -7,11 +7,20 @@
 	<meta name="author" content="Sarah Maston">
 	<meta name="keywords" content="obesity, save money, diet, health game, health tracker">
 	<meta name="description" content="Game that helps you change your eating behaviors... etc..">
+
+	<!-- CSS Links -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet"  type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/eggplant/jquery-ui.css" media="all" />
 	<link rel="stylesheet" href="css/lavish-bootstrap.css">
 	<link rel="stylesheet" href="/css/site.css">
-<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
- -->	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+	<!-- jQuery v1.11.2 -->
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+	<!-- jQueryUI v1.11.4 -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<!-- jquery-moment.js - jQuery Plugin to format Date src: momentjs.com v2.9.0 -->
+	<script src="js/moment.min.js"></script>
 </head>
 
 <body>
@@ -62,6 +71,8 @@
 <!-- end footer -->
 
 </div>
+    {{-- Yield any page specific JS files or anything else you might want at the end of the body --}}
+    @yield('body')
 </body>
 
 </html>

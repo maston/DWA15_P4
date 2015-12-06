@@ -59,27 +59,24 @@ class GameBoard extends Controller
 
     public function postCreate(Request $request)
     {
-        // dump($request);
-        // $nav_gameboard = 'active';
-        // $nav_settings = '';
-        // $nav_grocery_run = '';
-        // $nav_metrics = '';
-        $user = \Auth::user();
-        $grocery_run = \LMG\GroceryRun::find($request['grocery_run_id']);
+
+        // $user = \Auth::user();
+        // $grocery_run = \LMG\GroceryRun::find($request['grocery_run_id']);
 
 
-        $meal_count_day = new \LMG\MealCountDay;    
-        $meal_count_day->dt_meal_count = $request->dt_meal_count;
-        $meal_count_day->bfast_ct = $request->bfast_ct;
-        $meal_count_day->lunch_ct = $request->lunch_ct;
-        $meal_count_day->dinner_ct = $request->dinner_ct;
-        $meal_count_day->coffee_ct = $request->coffee_ct;
-        $meal_count_day->user()->associate($user);
-        $meal_count_day->grocery_run()->associate($grocery_run);
-        $meal_count_day->save();
+        // $meal_count_day = new \LMG\MealCountDay;    
+        // $meal_count_day->dt_meal_count = $request->dt_meal_count;
+        // $meal_count_day->bfast_ct = $request->bfast_ct;
+        // $meal_count_day->lunch_ct = $request->lunch_ct;
+        // $meal_count_day->dinner_ct = $request->dinner_ct;
+        // $meal_count_day->coffee_ct = $request->coffee_ct;
+        // $meal_count_day->user()->associate($user);
+        // $meal_count_day->grocery_run()->associate($grocery_run);
+        // $meal_count_day->save();
 
-        \Session::flash('flash_message','Your meal counts were saved.');
-        return redirect('/game-board');
+        // \Session::flash('flash_message','Your meal counts were saved.');
+        // return redirect('/game-board');
+        dump($request);
     }
 
     /**
@@ -117,7 +114,7 @@ class GameBoard extends Controller
       
         //get most recent grocery run (if we are doing show() then we get the selected grocery run)
         $selected_grocery_run = $user_grocery_runs->find($request->grocery_run_id);
-        
+
         $selected_meal_count_day = [];
         // if(isset($request->meal_count_day_dt)) {
             //need to figure out if the current day has an existing meal count

@@ -143,7 +143,9 @@ Route::get('/practice', function() {
     }
  });
 
-
+Route::get('/testing', function() {
+    return view('testing');
+ });
 
 
 
