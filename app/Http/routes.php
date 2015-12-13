@@ -51,14 +51,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/game-board/edit', 'GameBoard@postEdit');  //Update a MC from Grid
 
     // Test Board - fixing GB
-    Route::get('/test-board', 'TestBoard@index'); //load user GB to current GR with MCs
-    Route::get('/test-board/show/{id?}', 'TestBoard@getGroceryRun'); //load specific GB with GR
+    Route::get('/test-board', 'TestBoard@getGameBoard'); //load user GB to current GR with MCs
+    Route::get('/test-board/show/{id?}', 'TestBoard@getGameBoard'); //load specific GB with GR
     Route::get('/test-board/show/meal-count/{id}', 'TestBoard@getMealCount'); //load specific GB with GR
     Route::post('/test-board/show/meal-count', 'TestBoard@postMealCount');
     Route::post('/test-board/show/meal-count/create', 'TestBoard@createMealCount');
 
     // Grocery Run Routes
-    Route::get('/grocery-runs', 'GroceryRuns@index');
+    Route::get('/grocery-runs/{id?}', 'GroceryRuns@getGroceryRun');
+    Route::post('/grocery-runs', 'GroceryRuns@postGroceryRun');
 
     // Metrics Routes
     Route::get('/metrics', 'Metrics@show');
@@ -67,10 +68,10 @@ Route::group(['middleware' => 'auth'], function() {
 // Route::delete('/settings/{user_id}', 'Settings@destroy');
 
 // Route::get('/grocery-runs', 'GroceryRuns@index');
-Route::get('/grocery-runs/create/{id}', 'GroceryRuns@getCreate');
-Route::post('/grocery-runs/create', 'GroceryRuns@postCreate');
-Route::get('/grocery-runs/edit/{id}', 'GroceryRuns@getEdit');
-Route::post('/grocery-runs/edit', 'GroceryRuns@postEdit');
+// Route::get('/grocery-runs/create/{id}', 'GroceryRuns@getCreate');
+// Route::post('/grocery-runs/create', 'GroceryRuns@postCreate');
+// Route::get('/grocery-runs/edit/{id}', 'GroceryRuns@getEdit');
+// Route::post('/grocery-runs/edit', 'GroceryRuns@postEdit');
 
 // Route::post('/grocery-runs', 'GroceryRuns@store');
 // Route::get('/grocery-runs/{gr_id}', 'GroceryRuns@show');

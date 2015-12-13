@@ -16,7 +16,7 @@
 	          <li class= {{ $nav_metrics }} ><a href="#">Metrics</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	      	<li><a href="#">Coaching Corner</a></li>
+<!-- 	      	<li><a href="#">Coaching Corner</a></li> -->
 	        <li class= {{ $nav_settings }}><a href="/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
 			<li><p class="navbar-text navbar-right">Hello, {{$user_info['name']}} <span class="glyphicon glyphicon-user"></span>  (<a href="/logout" class="navbar-link">logout</a>)</p>
             </li>

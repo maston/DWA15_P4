@@ -26,6 +26,7 @@
                             <option value='{{ $grocery_run_id }}' {{ $selected }}> {{ $dt_grocery_run }} </option>
                         @endforeach
                     </select>
+                    <input type="submit" value="Add New" id="settings-submit-button" class="btn btn-primary btn-sm">
             </div>
             </div>
         </form>
@@ -64,36 +65,6 @@
           <input type="submit" value="Save" id="settings-submit-button" class="btn btn-primary btn-sm">
     </form> 
 @endif
-    <table class="table table-condensed active">
-        <caption>Meal Counts For This Grocery Run</caption>
-        <tr  class="active">
-            <th>Date of Meals</th>
-            <th>Breakfasts</th>
-            <th>Lunches</th>
-            <th>Dinners</th>
-            <th>Coffees</th>
-        </tr>
-    @foreach ($user_grocery_runs as $user_grocery_run) 
-      @if ($user_grocery_run['id']==$selected_grocery_run['id'])
-        @foreach($user_grocery_run->meal_count_day as $meal_count_day)
-            <tr>
-                <td><a href="/test-board/show/meal-count/{{$meal_count_day['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
-                <td>{{ $meal_count_day['bfast_ct'] }}</td> 
-                <td>{{ $meal_count_day['lunch_ct'] }}</td>
-                <td>{{ $meal_count_day['dinner_ct'] }}</td>
-                <td>{{ $meal_count_day['coffee_ct'] }}</td>
-            </tr>
-        @endforeach
-      @endif
-    @endforeach
-        <tr class="success">
-            <td>Totals</td>
-            <td>{{ $bfast_ct_tot }}</td>
-            <td>{{ $lunch_ct_tot }}</td>
-            <td>{{ $dinner_ct_tot }}</td>
-            <td>{{ $coffee_ct_tot }}</td>
-        </tr>
-    </table>
 <!--     <form class="meal-count-form" method="POST" action="/game-board/game-board/show/meal-count/create">
     <input type='hidden' value='{{ csrf_token() }}' name='_token'>
     <input type='hidden' value='{{ $user_info['id'] }}' name='user_id'>
@@ -135,7 +106,7 @@
                 <span class="saved-on-run">Total Saved :: ${{ $grocery_run_grand_tot }} </span></p>
             </div>
     <div class="settings-info">
-<!--     <table class="table table-condensed active">
+    <table class="table table-condensed active">
         <caption>Meal Counts For This Grocery Run</caption>
         <tr  class="active">
             <th>Date of Meals</th>
@@ -164,7 +135,7 @@
             <td>{{ $dinner_ct_tot }}</td>
             <td>{{ $coffee_ct_tot }}</td>
         </tr>
-    </table> -->
+    </table>
      <table class="table table-condensed active">
         <caption>Savings For This Grocery Run</caption>
         <tr class="active">

@@ -12,8 +12,10 @@
     <div class="grocery-run-bar">
         <h3>Your Grocery Run</h3>
 
-        <form method='POST' action='/game-board' id="form-grocery-run-select">
+        <form method='POST' action='/game-board' id="form-meal-count">
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>
+        <input type='hidden' value='{{ $user_info['id'] }}' name='user_id'>
+        <input type='hidden' value='{{ $selected_grocery_run['id'] }}' name='grocery_run_id'>
             <p class="grocery-run-deets">Select grocery run from drop down to change grocery run gameboard.</p>
             <div class='form-group'>
             <div class="input-group">
@@ -26,8 +28,43 @@
                             <option value='{{ $grocery_run_id }}' {{ $selected }}> {{ $dt_grocery_run }} </option>
                         @endforeach
                     </select>
+                <input type="submit" value="Add New" id="settings-submit-button" class="btn btn-primary btn-sm">
             </div>
             </div>
+            <div class='form-group'>
+            <div class="input-group">
+<!--         <fieldset> -->
+                <legend>Add Meal Count for Grocery Run</legend>
+                <label for="dt_meal_count">Select Date:</label>
+                <input class="date_select" type="text" size="11" name="dt_meal_count" id="dt_meal_count"/><!--  onchange="myFunction(this.value)"/> -->
+                <br>
+                <label for="bfast_ct">Breakfasts:</label>
+                <input type="button" id ='bfast_sub' onclick="return false;" value="-">
+                @if($meal_count_selected)
+                    <input type="number" name="bfast_ct" id="bfast_ct" class="meal-count-input" min="0" max="30" value="{{ old('bfast_ct',$selected_meal_count_day['bfast_ct']) }}">  
+                @else
+                    <input type="number" name="bfast_ct" id="bfast_ct" class="meal-count-input" min="0" max="30" value="{{ old('bfast_ct',0) }}">
+                @endif
+                <input type="button" id ='bfast_add' onclick="return false;" value="+">
+                <br>
+                <label for="lunch_ct">Lunches:</label>
+                <input type="button" id ='lunch_sub' onclick="return false;" value="-">
+                <input type="number" name="lunch_ct" id="lunch_ct" class="meal-count-input" min="0" max="30" value="{{ old('lunch_ct',0) }}"> 
+                <input type="button" id ='lunch_add' onclick="return false;" value="+">
+                <br>
+                <label for="dinner_ct">Dinners:</label>
+                <input type="button" id ='dinner_sub' onclick="return false;" value="-">
+                <input type="number" name="dinner_ct" id="dinner_ct" class="meal-count-input" min="0" max="30" value="{{ old('dinner_ct',0) }}"> 
+                <input type="button" id ='dinner_add' onclick="return false;" value="+">
+                <br>
+                <label for="coffee_ct">Coffee:</label>
+                <input type="button" id ='coffee_sub' onclick="return false;" value="-">
+                <input type="number" name="coffee_ct" id="coffee_ct" class="meal-count-input" min="0" max="30" value="{{ old('coffee_ct',0) }}"> 
+                <input type="button" id ='coffee_add' onclick="return false;" value="+">
+<!--         </fieldset> -->
+            </div>
+            </div>
+            <input type="submit" value="Add Meal Count" id="settings-submit-button" class="btn btn-primary btn-sm">
         </form>
     </div>
 

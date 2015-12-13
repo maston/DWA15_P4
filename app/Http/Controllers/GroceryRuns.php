@@ -22,10 +22,62 @@ class GroceryRuns extends Controller
         // $nav_metrics = '';
         $user_info = \Auth::user();
         $user_grocery_runs = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get(); 
+        $grocery_run_selected = false;
+
          // dump($user_info);   
         return view('GroceryRuns.index')
             ->with('user_grocery_runs', $user_grocery_runs)
-            ->with('user_info', $user_info);
+            ->with('user_info', $user_info)
+            ->with('grocery_run_selected', $grocery_run_selected);
+    }
+
+    public function getGroceryRun($id = null)
+    {
+        // $nav_gameboard = '';
+        // $nav_settings = '';
+        // $nav_grocery_run = 'active';
+        // $nav_metrics = '';
+        $user_info = \Auth::user();
+        $user_grocery_runs = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get(); 
+        $grocery_run_selected = isset($id);
+
+        $selected_grocery_run = $user_grocery_runs->find($id);
+
+         // dump($user_info);   
+        return view('GroceryRuns.show')
+            ->with('user_grocery_runs', $user_grocery_runs)
+            ->with('selected_grocery_run', $selected_grocery_run)
+            ->with('user_info', $user_info)
+            ->with('grocery_run_selected', $grocery_run_selected);
+    }
+
+    public function postGroceryRun(Request $request)
+    {
+
+        $user = \Auth::user();
+        
+        if(isset($request->grocery_run_id)) {
+            $grocery_run = \LMG\GroceryRun::find($request->grocery_run_id);  
+        }
+        else {
+            $grocery_run = new \LMG\GroceryRun;   
+        }
+
+        $grocery_run->dt_grocery_run = $request->dt_grocery_run;
+        $grocery_run->total_amt = $request->total_amt;
+        $grocery_run->non_food_amt = $request->non_food_amt;
+        $grocery_run->food_amt = $request->food_amt;
+        $grocery_run->user()->associate($user);
+        $grocery_run->save();
+
+        \Session::flash('flash_message','Your grocery run was saved.');
+
+        if(isset($request->grocery_run_id)) {
+            return redirect('/grocery-runs/'.$request->grocery_run_id);  
+        }
+        else {
+            return redirect('/grocery-runs'); 
+        }
     }
 
     /**
@@ -49,26 +101,26 @@ class GroceryRuns extends Controller
             ->with('nav_metrics', $nav_metrics);
     }
 
-    public function postCreate(Request $request)
-    {
-        // dump($request);
-        $nav_gameboard = '';
-        $nav_settings = '';
-        $nav_grocery_run = 'active';
-        $nav_metrics = '';
-        $user = \LMG\User::find($request['user_id']);
+    // public function postCreate(Request $request)
+    // {
+    //     // dump($request);
+    //     $nav_gameboard = '';
+    //     $nav_settings = '';
+    //     $nav_grocery_run = 'active';
+    //     $nav_metrics = '';
+    //     $user = \LMG\User::find($request['user_id']);
 
-        $grocery_run = new \LMG\GroceryRun;    
-        $grocery_run->dt_grocery_run = $request->dt_grocery_run;
-        $grocery_run->total_amt = $request->total_amt;
-        $grocery_run->non_food_amt = $request->non_food_amt;
-        $grocery_run->food_amt = $request->food_amt;
-        $grocery_run->user()->associate($user);
-        $grocery_run->save();
+    //     $grocery_run = new \LMG\GroceryRun;    
+    //     $grocery_run->dt_grocery_run = $request->dt_grocery_run;
+    //     $grocery_run->total_amt = $request->total_amt;
+    //     $grocery_run->non_food_amt = $request->non_food_amt;
+    //     $grocery_run->food_amt = $request->food_amt;
+    //     $grocery_run->user()->associate($user);
+    //     $grocery_run->save();
 
-        \Session::flash('flash_message','Your grocery run was saved.');
-        return redirect('/grocery-runs/'.$grocery_run->user_id);
-    }
+    //     \Session::flash('flash_message','Your grocery run was saved.');
+    //     return redirect('/grocery-runs/'.$grocery_run->user_id);
+    // }
 
 
 
