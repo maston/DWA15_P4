@@ -18,7 +18,7 @@
             <div class='form-group'>
             <div class="input-group">
             <div class="input-group-addon">Grocery Run Date:</div>
-                <select name='grocery_run_id' id='grocery_run_id' class="form-control grocery-run-date-select" onchange="this.form.submit()">
+                <select name='grocery_run_id' id='grocery_run_id' class="form-control grocery-run-date-select" onchange="showSelectedGroceryRun()">
                         @foreach($grocery_run_for_dropdown as $grocery_run_id => $dt_grocery_run)
 
                             {{ $selected = ($grocery_run_id == $selected_grocery_run['id']) ? 'selected' : '' }}
@@ -31,7 +31,7 @@
         </form>
     </div>
 
-    <form class="meal-count-form" method="POST" action="/game-board/create">
+<!--     <form class="meal-count-form" method="POST" action="/game-board/create">
     <input type='hidden' value='{{ csrf_token() }}' name='_token'>
     <input type='hidden' value='{{ $user_info['id'] }}' name='user_id'>
     <input type='hidden' value='{{ $selected_grocery_run['id'] }}' name='grocery_run_id'>
@@ -64,7 +64,7 @@
             <input type="button" id ='coffee_add' onclick="return false;" value="+">
         </fieldset>
           <input type="submit" value="Save" id="settings-submit-button" class="btn btn-primary btn-sm">
-    </form> 
+    </form>  -->
   </div>
   <div class="col-md-6">
     <h3>Grocery Run Summary</h3>
@@ -86,7 +86,7 @@
       @if ($user_grocery_run['id']==$selected_grocery_run['id'])
         @foreach($user_grocery_run->meal_count_day as $meal_count_day)
             <tr>
-                <td><a href="/game-board/show/{{$meal_count_day['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
+                <td><a href="/test-board/show/meal-count/{{$meal_count_day['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
                 <td>{{ $meal_count_day['bfast_ct'] }}</td> 
                 <td>{{ $meal_count_day['lunch_ct'] }}</td>
                 <td>{{ $meal_count_day['dinner_ct'] }}</td>
@@ -116,7 +116,7 @@
       @if ($user_grocery_run['id']==$selected_grocery_run['id'])
         @foreach($user_grocery_run->meal_count_day as $meal_count_day)
         <tr>
-            <td><a href="/grocery-runs/edit/{{$meal_count_day['grocery_run_id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
+            <td><a href="/test-board/show/meal-count/{{$meal_count_day['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
             <td>{{ $meal_count_day['bfast_ct'] * $user_info['bfast_spend']}}</td> 
             <td>{{ $meal_count_day['lunch_ct'] * $user_info['lunch_spend'] }}</td>
             <td>{{ $meal_count_day['dinner_ct'] * $user_info['dinner_spend'] }}</td>
@@ -140,6 +140,13 @@
 
 @section('body')
 
+    <script type="text/javascript">
+        function showSelectedGroceryRun() {
+            //get selected grocery run's gameboard
+            // location.href="test-board/show/"+document.getElementById('grocery_run_id').value;
+            window.open("test-board/show/"+document.getElementById('grocery_run_id').value,"_self")
+        }
+    </script>
 
     <script type="text/javascript">
 
@@ -234,10 +241,5 @@
         });
     });
     </script>
-    <script>
-        // function myFunction(val) {
-        //     alert("The input value has changed. The new value is: " + val);
-        //     // document.getElementById("form-grocery-run-select").submit();
-        // }
-</script>
+
 @stop

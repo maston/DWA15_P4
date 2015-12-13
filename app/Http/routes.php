@@ -41,12 +41,21 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/settings', 'Settings@postEdit');
 
     // Game Board Routes - manages meal counts
-    Route::get('/game-board', 'GameBoard@index'); //load user GB to current GR with MCs
+    Route::get('/game-board', 'GameBoard@postShow'); //load user GB to current GR with MCs
     Route::post('/game-board', 'GameBoard@postShow');
+    Route::get('/game-board/show/{id?}', 'GameBoard@getShow');
 
     Route::post('/game-board/create', 'GameBoard@postCreate'); //Add a new MC
+
     Route::get('/game-board/edit', 'GameBoard@getEdit');  //Edit a MC from Grid
     Route::post('/game-board/edit', 'GameBoard@postEdit');  //Update a MC from Grid
+
+    // Test Board - fixing GB
+    Route::get('/test-board', 'TestBoard@index'); //load user GB to current GR with MCs
+    Route::get('/test-board/show/{id?}', 'TestBoard@getGroceryRun'); //load specific GB with GR
+    Route::get('/test-board/show/meal-count/{id}', 'TestBoard@getMealCount'); //load specific GB with GR
+    Route::post('/test-board/show/meal-count', 'TestBoard@postMealCount');
+    Route::post('/test-board/show/meal-count/create', 'TestBoard@createMealCount');
 
     // Grocery Run Routes
     Route::get('/grocery-runs', 'GroceryRuns@index');

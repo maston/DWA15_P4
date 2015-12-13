@@ -12,15 +12,13 @@
     <div class="grocery-run-bar">
         <h3>Your Grocery Run</h3>
 
-        <form method='POST' action='/game-board'>
+        <form method='POST' action='/game-board' id="form-grocery-run-select">
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>
             <p class="grocery-run-deets">Select grocery run from drop down to change grocery run gameboard.</p>
-            <!-- <h4 class="grocery-run-deets">Grocery Run Date: {{ $selected_grocery_run['dt_grocery_run'] }}</h4> -->
             <div class='form-group'>
             <div class="input-group">
             <div class="input-group-addon">Grocery Run Date:</div>
-                <!-- <label for='grocery_run_id'>Grocery Run Date:</label> -->
-                <select name='grocery_run_id' id='grocery_run_id' class="form-control grocery-run-date-select">
+                <select name='grocery_run_id' id='grocery_run_id' class="form-control grocery-run-date-select" onchange="this.form.submit()">
                         @foreach($grocery_run_for_dropdown as $grocery_run_id => $dt_grocery_run)
 
                             {{ $selected = ($grocery_run_id == $selected_grocery_run['id']) ? 'selected' : '' }}
@@ -30,23 +28,6 @@
                     </select>
             </div>
             </div>
-            <input type="submit" value="Load GR" class="btn btn-primary settings-save-btn">
-            <div class="grocery-run-deets">
-                <p class="spent-on-run">Spent on Grocery Run :: ${{ $selected_grocery_run['food_amt'] }} 
-                <span class="saved-on-run">Saved :: ${{ $grocery_run_grand_tot }} </span></p>
-            </div>
-<!--            <div class='form-group'>
-                <label for='grocery_run_id'>Grocery Run Date:</label>
-                <select name='grocery_run_id' id='grocery_run_id'>
-                    @foreach($grocery_run_for_dropdown as $grocery_run_id => $dt_grocery_run)
-
-                        {{ $selected = ($grocery_run_id == $selected_grocery_run['id']) ? 'selected' : '' }}
-
-                        <option value='{{ $grocery_run_id }}' {{ $selected }}> {{ $dt_grocery_run }} </option>
-                    @endforeach
-                </select>
-            </div> -->
-            
         </form>
     </div>
 
@@ -57,30 +38,29 @@
     @if(!empty($selected_meal_count_day))
     <input type='hidden' value='{{ $selected_meal_count_day['id'] }}' name='meal_count_day_id'>
     @endif
-    <!-- <h4>Meal Counts</h4> -->
         <fieldset>
-            <legend>Number of Meal Counts for day</legend>
+            <legend>Add Meal Counts for Grocery Run</legend>
             <label for="dt_meal_count">Select Date:</label>
-            <input class="date_select" type="text" size="11" name="dt_meal_count" id="dt_meal_count" />
+            <input class="date_select" type="text" size="11" name="dt_meal_count" id="dt_meal_count" onchange="myFunction(this.value)"/>
             <br>
             <label for="bfast_ct">Breakfasts:</label>
             <input type="button" id ='bfast_sub' onclick="return false;" value="-">
-            <input type="number" name="bfast_ct" id="bfast_ct" class="form-control meal-count-input" value="{{ old('bfast_ct',0) }}"> 
+            <input type="number" name="bfast_ct" id="bfast_ct" class="meal-count-input" min="0" max="30" value="{{ old('bfast_ct',0) }}"> 
             <input type="button" id ='bfast_add' onclick="return false;" value="+">
             <br>
             <label for="lunch_ct">Lunches:</label>
             <input type="button" id ='lunch_sub' onclick="return false;" value="-">
-            <input type="number" name="lunch_ct" id="lunch_ct" class="form-control meal-count-input" value="{{ old('lunch_ct',0) }}"> 
+            <input type="number" name="lunch_ct" id="lunch_ct" class="meal-count-input" min="0" max="30" value="{{ old('lunch_ct',0) }}"> 
             <input type="button" id ='lunch_add' onclick="return false;" value="+">
             <br>
             <label for="dinner_ct">Dinners:</label>
             <input type="button" id ='dinner_sub' onclick="return false;" value="-">
-            <input type="number" name="dinner_ct" id="dinner_ct" class="form-control meal-count-input" value="{{ old('dinner_ct',0) }}"> 
+            <input type="number" name="dinner_ct" id="dinner_ct" class="meal-count-input" min="0" max="30" value="{{ old('dinner_ct',0) }}"> 
             <input type="button" id ='dinner_add' onclick="return false;" value="+">
             <br>
             <label for="coffee_ct">Coffee:</label>
             <input type="button" id ='coffee_sub' onclick="return false;" value="-">
-            <input type="number" name="coffee_ct" id="coffee_ct" class="form-control meal-count-input" value="{{ old('coffee_ct',0) }}"> 
+            <input type="number" name="coffee_ct" id="coffee_ct" class="meal-count-input" min="0" max="30" value="{{ old('coffee_ct',0) }}"> 
             <input type="button" id ='coffee_add' onclick="return false;" value="+">
         </fieldset>
           <input type="submit" value="Save" id="settings-submit-button" class="btn btn-primary btn-sm">
@@ -88,6 +68,10 @@
   </div>
   <div class="col-md-6">
     <h3>Grocery Run Summary</h3>
+            <div class="grocery-run-deets">
+                <p class="spent-on-run">Spent on Grocery Run :: ${{ $selected_grocery_run['food_amt'] }} 
+                <span class="saved-on-run">Total Saved :: ${{ $grocery_run_grand_tot }} </span></p>
+            </div>
     <div class="settings-info">
     <table class="table table-condensed active">
         <caption>Meal Counts For This Grocery Run</caption>
@@ -102,7 +86,7 @@
       @if ($user_grocery_run['id']==$selected_grocery_run['id'])
         @foreach($user_grocery_run->meal_count_day as $meal_count_day)
             <tr>
-                <td><a href="/grocery-runs/edit/{{$meal_count_day['grocery_run_id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
+                <td><a href="/game-board/show/{{$meal_count_day['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
                 <td>{{ $meal_count_day['bfast_ct'] }}</td> 
                 <td>{{ $meal_count_day['lunch_ct'] }}</td>
                 <td>{{ $meal_count_day['dinner_ct'] }}</td>
@@ -158,6 +142,7 @@
 
 
     <script type="text/javascript">
+
     $(document).ready(function() {
       //** begin onLoad events **
         //global vars
@@ -168,11 +153,31 @@
         // var test = new Date(default_year, default_month - 1, default_day)
         // console.log(test);
         // var date_today = new Date();
-        var grocery_run_date = new Date(2015,11,4);  //year, month-1, day of grocery run
+        // var userID = "{{ Auth::user()->id }}";
+        // Carbon\Carbon::parse('11/06/1990')->format('d/m/Y')
 
+        // var grocery_run_year = "{{ Carbon\Carbon::parse($dt_grocery_run)->format('Y') }}";
+
+        // var grocery_run_month = "{{ Carbon\Carbon::parse($dt_grocery_run)->format('m') }}";
+        // var grocery_run_day = "{{ Carbon\Carbon::parse($dt_grocery_run)->format('d') }}";
+        // var grocery_run_date = new Date(2015,11,4);  //year, month-1, day of grocery run
+        // var grocery_run_date = new Date(document.getElementById('grocery_run_id').options[selectedIndex].text); 
+        // alert("grocery run date: " + grocery_run_date);
+        var e = document.getElementById("grocery_run_id");
+        var selected_grocery_run_date = e.options[e.selectedIndex].text;
+        var grocery_run_date = new Date(selected_grocery_run_date);
+        var default_date = new Date();
         //create datepicker
         $('input.date_select').datepicker({ minDate: grocery_run_date});
+        $('input.date_select').datepicker( "setDate" , default_date );
+        // $('input.date_select').datepicker( "setDate", "10/12/2012" );
         console.log("loaded doc with datepickers");
+        // console.log("grocery run year: " + grocery_run_year);
+        // console.log("grocery run month: " + grocery_run_month);
+        // console.log("grocery run day: " + grocery_run_day);
+        // console.log("grocery run date: " + grocery_run_date);
+        // console.log("grocery run select val: " + document.getElementById('grocery_run_id').options[selectedIndex].text);
+
         
         // BFAST ADD/SUB BUTTONS
         $('#bfast_add').click(function(){
@@ -230,4 +235,10 @@
         });
     });
     </script>
+    <script>
+        // function myFunction(val) {
+        //     alert("The input value has changed. The new value is: " + val);
+        //     // document.getElementById("form-grocery-run-select").submit();
+        // }
+</script>
 @stop

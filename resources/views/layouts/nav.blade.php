@@ -11,7 +11,7 @@
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	    @if(Auth::check())
 	      <ul class="nav navbar-nav">
-	          <li class= {{ $nav_gameboard }} ><a href="/game-board">Your Gameboard</a></li>
+	          <li class= {{ $nav_gameboard }} ><a href="/test-board">Your Gameboard</a></li>
 	          <li class= {{ $nav_grocery_run }} ><a href="/grocery-runs">Grocery Runs</a></li>
 	          <li class= {{ $nav_metrics }} ><a href="#">Metrics</a></li>
 	      </ul>
