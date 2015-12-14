@@ -11,7 +11,7 @@
 	<!-- CSS Links -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet"  type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/eggplant/jquery-ui.css" media="all" />
-	<link rel="stylesheet" href="css/lavish-bootstrap.css">
+	<link rel="stylesheet" href="/css/lavish-bootstrap.css">
 	<link rel="stylesheet" href="/css/site.css">
   
 	<!-- jQuery v1.11.2 -->
@@ -20,7 +20,7 @@
 	<!-- jQueryUI v1.11.4 -->
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<!-- jquery-moment.js - jQuery Plugin to format Date src: momentjs.com v2.9.0 -->
-	<script src="js/moment.min.js"></script>
+	<!-- <script src="/js/moment.min.js"></script> -->
 </head>
 
 <body>
@@ -34,19 +34,8 @@
         @yield('nav')
 </header>
 <!--  end header -->
-<section class="row kpi-bar">
 
-		@if(Auth::check())
-	<div class="col-md-12">
-		<span class="kpi-total-save">Total You've Saved : a number</span>
-		<span class="kpi-global-total-save">All Players : some other number</span>
-	</div>
-		@else
-	<div class="col-md-12">
-		<span class="kpi-global-total-save">Global Save :: number that is updating</span>
-	</div>
-		@endif
-</section>
+@yield('kpi-bar')
         
 @yield('game_board_grocery_run_info')
 

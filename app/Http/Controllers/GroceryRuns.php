@@ -14,22 +14,22 @@ class GroceryRuns extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // $nav_gameboard = '';
-        // $nav_settings = '';
-        // $nav_grocery_run = 'active';
-        // $nav_metrics = '';
-        $user_info = \Auth::user();
-        $user_grocery_runs = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get(); 
-        $grocery_run_selected = false;
+    // public function index()
+    // {
+    //     // $nav_gameboard = '';
+    //     // $nav_settings = '';
+    //     // $nav_grocery_run = 'active';
+    //     // $nav_metrics = '';
+    //     $user_info = \Auth::user();
+    //     $user_grocery_runs = \LMG\GroceryRun::orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get(); 
+    //     $grocery_run_selected = false;
 
-         // dump($user_info);   
-        return view('GroceryRuns.index')
-            ->with('user_grocery_runs', $user_grocery_runs)
-            ->with('user_info', $user_info)
-            ->with('grocery_run_selected', $grocery_run_selected);
-    }
+    //      // dump($user_info);   
+    //     return view('GroceryRuns.index')
+    //         ->with('user_grocery_runs', $user_grocery_runs)
+    //         ->with('user_info', $user_info)
+    //         ->with('grocery_run_selected', $grocery_run_selected);
+    // }
 
     public function getGroceryRun($id = null)
     {
@@ -43,12 +43,24 @@ class GroceryRuns extends Controller
 
         $selected_grocery_run = $user_grocery_runs->find($id);
 
+                //kpi totals
+        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
+        foreach($user_total_saved as $user_tot) {
+            $user_total_save = $user_tot->tot;
+        }
+        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id)");
+        foreach($game_total_saved as $game_tot) {
+            $game_total_save = $game_tot->tot;
+        } 
+
          // dump($user_info);   
         return view('GroceryRuns.show')
             ->with('user_grocery_runs', $user_grocery_runs)
             ->with('selected_grocery_run', $selected_grocery_run)
             ->with('user_info', $user_info)
-            ->with('grocery_run_selected', $grocery_run_selected);
+            ->with('grocery_run_selected', $grocery_run_selected)
+            ->with('user_total_save', $user_total_save)
+            ->with('game_total_save', $game_total_save); 
     }
 
     public function postGroceryRun(Request $request)
@@ -76,7 +88,7 @@ class GroceryRuns extends Controller
             return redirect('/grocery-runs/'.$request->grocery_run_id);  
         }
         else {
-            return redirect('/grocery-runs'); 
+            return redirect('/game-board'); 
         }
     }
 

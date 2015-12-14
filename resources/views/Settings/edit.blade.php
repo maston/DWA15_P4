@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
 @section('nav')
-  @include('layouts.nav', [$nav_gameboard = '', $nav_grocery_run = '', $nav_metrics = '', $nav_settings = 'active', $nav_register = '', $nav_login = ''])
+  @include('partials.nav', [$nav_gameboard = '', $nav_grocery_run = '', $nav_metrics = '', $nav_settings = 'active', $nav_register = '', $nav_login = ''])
+@stop
+
+@section('kpi-bar')
+    @include('partials.kpi-bar')
 @stop
 
 @section('content')
@@ -9,7 +13,7 @@
 <!-- settings form section  -->
 <div class="col-md-6">
   <form class="settings-form" method="POST" action="/settings">
-    <input type='hidden' value='{{ csrf_token() }}' name='_token'>
+    {!! csrf_field() !!}
     <fieldset>
     	<legend>Settings :: Average Spend (in dollars)</legend>
       <div class="form-group">

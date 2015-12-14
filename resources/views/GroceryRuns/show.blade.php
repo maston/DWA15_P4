@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
 @section('nav')
-  @include('layouts.nav', [$nav_gameboard = '', $nav_grocery_run = 'active', $nav_metrics = '', $nav_settings = '', $nav_register = '', $nav_login = ''])
+  @include('partials.nav', [$nav_gameboard = '', $nav_grocery_run = 'active', $nav_metrics = '', $nav_settings = '', $nav_register = '', $nav_login = ''])
+@stop
+
+@section('kpi-bar')
+	@include('partials.kpi-bar')
 @stop
 
 @section('content')
@@ -16,7 +20,7 @@
     </div>
 
     <form class="grocery-run-form" method="POST" action="/grocery-runs">
-    <input type='hidden' value='{{ csrf_token() }}' name='_token'>
+    {!! csrf_field() !!}
     @if($grocery_run_selected)
         <input type='hidden' value='{{ $selected_grocery_run['id'] }}' name='grocery_run_id'>
     @endif  
@@ -78,17 +82,14 @@
             <input type="button" value="Cancel" class="btn btn-primary btn-sm"/>
         </a>
     </form>
-          <h4>Definitions</h4>
-        <p>Total Amount: The amount on the receipt rounded to the nearest dollar.</p>
-        <p>Non-Food Amount: What you spent on things you don't eat, like cat litter. (unless you are Stimpy?)</p>
-        <p>Food Amount: This is the number that your grocery run will reflect on the Gameboard, we will count your meal counts against.</p>
   </div>
   <div class="col-md-6">
-<h3>Your Grocery Runs (click date to edit)</h3> 
+<h3>Your Grocery Runs</h3> 
+
     <table  class="table table-condensed active table-hover">
 <!--         <caption>Your Grocery Runs</caption> -->
         <tr class="active">
-            <th>Date</th>
+            <th>Date (click date to edit)</th>
             <th>Total Amt</th>
             <th>Non Food Amt</th>
             <th>Food Amt</th>
@@ -104,8 +105,12 @@
     @endforeach
     </table>
     <a href="/grocery-runs/">
-        Add New
+        <input type="button" value="Add New" class="btn btn-primary btn-sm"/>
     </a>
+          <h4>Definitions</h4>
+        <p>Total Amount: The amount on the receipt rounded to the nearest dollar.</p>
+        <p>Non-Food Amount: What you spent on things you don't eat, like cat litter. (unless you are Stimpy?)</p>
+        <p>Food Amount: This is the number that your grocery run will reflect on the Gameboard, we will count your meal counts against.</p>
   </div>
 <!-- end main content section -->
 @stop

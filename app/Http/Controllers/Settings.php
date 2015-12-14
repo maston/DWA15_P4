@@ -16,12 +16,24 @@ class Settings extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getEdit()
+    public function getSettings()
     {
         $user_info = \Auth::user();
 
+        //kpi totals
+        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
+        foreach($user_total_saved as $user_tot) {
+            $user_total_save = $user_tot->tot;
+        }
+        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id)");
+        foreach($game_total_saved as $game_tot) {
+            $game_total_save = $game_tot->tot;
+        } 
+
         return View('Settings.edit')
-            ->with('user_info', $user_info);
+            ->with('user_info', $user_info)
+            ->with('user_total_save', $user_total_save)
+            ->with('game_total_save', $game_total_save); 
     }
 
     /**
@@ -31,7 +43,7 @@ class Settings extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function postEdit(Request $request)
+    public function postSettings(Request $request)
     {
 
          // Validation
@@ -46,60 +58,4 @@ class Settings extends Controller
         \Session::flash('flash_message','Your settings were updated.');
         return redirect('/settings');
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function index()
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     return view('Settings.show');
-
-    // }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }

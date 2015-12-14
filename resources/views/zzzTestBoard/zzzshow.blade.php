@@ -4,6 +4,10 @@
     @include('layouts.nav', [$nav_gameboard = 'active', $nav_grocery_run = '', $nav_metrics = '', $nav_settings = '', $nav_register = '', $nav_login = ''])
 @stop
 
+@section('kpi-bar')
+    @include('layouts.kpi-bar')
+@stop
+
 @section('content')
    
 <!-- begin main content section -->

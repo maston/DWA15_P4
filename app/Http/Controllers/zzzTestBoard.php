@@ -145,6 +145,16 @@ class TestBoard extends Controller
         // dump($meal_count_selected);
         // dump($now);
 
+        //kpi totals
+        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
+        foreach($user_total_saved as $user_tot) {
+            $user_total_save = $user_tot->tot;
+        }
+        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id =".$user_info->id);
+        foreach($game_total_saved as $game_tot) {
+            $game_total_save = $game_tot->tot;
+        }        
+
         return view('TestBoard.show')
             ->with('user_grocery_runs', $user_grocery_runs)
             ->with('grocery_run_for_dropdown', $grocery_run_for_dropdown)
@@ -160,7 +170,9 @@ class TestBoard extends Controller
             ->with('dinner_save_tot', $dinner_save_tot)
             ->with('coffee_save_tot', $coffee_save_tot)
             ->with('grocery_run_grand_tot', $grocery_run_grand_tot)
-            ->with('meal_count_selected', $meal_count_selected); 
+            ->with('meal_count_selected', $meal_count_selected)
+            ->with('user_total_save', $user_total_save)
+            ->with('game_total_save', $game_total_save); 
     }
 
     public function getMealCount($mc_id = null)
