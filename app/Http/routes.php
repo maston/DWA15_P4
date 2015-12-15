@@ -46,11 +46,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/game-board/show/{id?}', 'GameBoard@getGameBoard'); //load specific GB with GR
     Route::get('/game-board/show/meal-count/{id}', 'GameBoard@getMealCount'); //load specific GB with GR
     Route::post('/game-board/show/meal-count', 'GameBoard@postMealCount');
-    Route::post('/game-board/show/meal-count/create', 'GameBoard@createMealCount');
+    Route::post('/game-board/show/meal-count/create', 'GameBoard@postCreateMealCount');
+    Route::get('/game-board/show/meal-count/delete/{id}', 'GameBoard@getDeleteMealCount');
 
     // Grocery Run Routes
     Route::get('/grocery-runs/{id?}', 'GroceryRuns@getGroceryRun');
     Route::post('/grocery-runs', 'GroceryRuns@postGroceryRun');
+    Route::get('/grocery-runs/delete/{id}', 'GroceryRuns@getDeleteGroceryRun');
 
     // Metrics Routes
     Route::get('/metrics', 'Metrics@index');

@@ -1,16 +1,59 @@
+/* Begin Sticky Footer */
+/* http://mystrd.at/modern-clean-css-sticky-footer */
+html {
+    position:relative;
+    min-height:100%;
+}
+body {
+    margin:0 0 100px; /* bottom = footer height */
+}
 
-/* begin general styles for site */
-footer { 
+main {
+    border-radius: 4px;
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
+footer {
+    position: absolute;
+    left:0;
+    bottom:0;
+    height:30px;
+    width:100%;
+    text-align:center;
+    padding:5px;
   border-radius:4px;
   margin-top: 0px;
 }
+/* End Sticky Footer */
 
+/* begin general styles for site */
 footer #footer-copyright {
   text-align: center;     
 }
 
-table th {
-  white-space: nowrap;
+ul.errors {
+    color:red;
+    margin:0;
+    margin-top:5px;
+    padding:0;
+    list-style-type:none;
+}
+
+.clear-all {
+  clear:both;
+}
+
+.flash_message {
+  width:35%;
+  margin-right:auto;
+  margin-left:auto;
+  display:block;
+  text-align:center;
+  padding:5px;
+  border-radius: 5px;
+  background-color:#D66100;
+  color:white;
 }
 
 /* overload of bootstrap style */
@@ -19,74 +62,83 @@ table th {
     border-bottom-right-radius: 0px;
     margin-bottom: 0px;
 }
-main {
-    border-radius: 4px;
-    margin-top: .25em;
-    margin-bottom: .25em;
-}
+
+
+/****************************************
+  KPI BAR 
+***************************************/
+
 .kpi-bar {
-    background-color: #222222;
-    border-top-color: #4F7A30;
-    border-top-width: 2px;
-    border-top-style: solid;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+  background-color: #222222;
+  border-top-color: #4F7A30;
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .kpi-bar .kpi-total-save {
-    color: #617992;
+  color: #617992;
+}
+
+.kpi-bar-blank {
+  height:14px;
 }
 
 .kpi-global-total-save {
-    float:right;
-    color: #617992;
+  float:right;
+  color: #617992;
 }
 
+/****************************************
+  GAMEBOARD 
+***************************************/
+
 .game-board-intro {
-    height:40px;
-      border-radius: 4px;
+  border-radius: 4px;
   border: solid 1px;
   padding:.25em;
 }
 
 .game-board-section-mc {
-   /* background-color: rgba(42, 34, 109, 0.78);*/
-    /*height: 50px;*/
-    margin-top: .25em;
-    border-radius: 4px;
-    border: solid 2px white;
-    padding-left:1em;
-    padding-right:1em;
-    padding-bottom: .5em;
+  margin-top: .25em;
+  border-radius: 4px;
+  border: solid 2px white;
+  padding-left:1em;
+  padding-right:1em;
+  padding-bottom: .5em;
 }
 
 .game-board-date-select {
   border-radius: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
+
 .game-board-add-grocery-run .btn-primary {
   float:right;
   background-color: green;
 }
 
 .game-board-select-dt {
-    line-height: 34px;
+  line-height: 34px;
 }
 
 .game-board-input-label {
-    margin-top:.25em;
-    margin-bottom:.25em;
+  margin-top:.25em;
+  margin-bottom:.25em;
 }
 
 .game-board-input {
-    margin-top:.25em;
-    margin-bottom:.25em;
-    padding-left:50px;
+  margin-top:.25em;
+  margin-bottom:.25em;
+  padding-left:50px;
 }
 
 
 .game-board-add-button {
-    float:right;
-    background-color: green;
+  float:right;
+  background-color: green;
 }
 
 .game-board-grid {
@@ -98,51 +150,135 @@ main {
   padding-right: .25em;
   padding-bottom: 1em;
 }
+
 .game-board-grocery-run-metrics {
-    /*color: black;*/
-    margin-top: 0;
-    margin-bottom:0;
-    font-size: 16px;
-    border-radius: 4px;
-    border: solid 1px;
-        padding-left: .5em;
-    padding-right: .5em;
-    height:40px;
-        padding-top: 7px;
+  margin-top: 0;
+  margin-bottom:0;
+  font-size: 16px;
+  border-radius: 4px;
+  border: solid 1px;
+  padding-left: .5em;
+  padding-right: .5em;
+  padding-top: 7px;
+  background-color: #C8CACB;
 }
 
 .game-board-spent-on-run {
-    
-    margin:0;
-}
-
-.game-board-saved-on-run {
-  float: right;
   margin:0;
 }
 
+.game-board-saved-on-run {
+  float:right;
+  margin:0;
+}
+
+.game-board-grid-item {
+  text-align: center;
+}
 .game-board-metrics-button {
   background-color: orange;
   float:right;
-/*  clear:right;*/
+}
+.game-board-delete-button {
+  background-color: red;
+  float:right;
 }
 
+/****************************************
+  GROCERY RUN
+***************************************/
 
-/* SETTINGS VIEW */
-/* settings form section */
+.grocery-run-section {
+  margin-top: .25em;
+  border-radius: 4px;
+  border: solid 2px white;
+  padding-left:1em;
+  padding-right:1em;
+  padding-bottom: .5em;
+}
+
+.grocery-run-intro {
+  border-radius: 4px;
+  border: solid 1px;
+  padding:.25em;
+}
+
+.grocery-run-input-label {
+  margin-top:.25em;
+  margin-bottom:.25em;
+}
+
+.grocery-run-input-date {
+  padding-left: 0;
+}
+
+.grocery-run-date-select {
+  border-radius: 2px;
+}
+
+.grocery-run-select-dt-label {
+  line-height: 34px;
+}
+
+.grocery-run-definitions {
+  border-radius: 4px;
+  border: solid 1px;
+  padding:.25em;
+  background-color: #C8CACB;
+}
+
+.grocery-run-add-btn {
+  float:right;
+  background-color: green;  
+}
+.grocery-run-save-btn {
+  margin-top:1em;
+  margin-bottom:1em;
+  float:right;
+  background-color: green;
+}
+
+.grocery-run-delete-button {
+  background-color: red;
+  float:right;
+}
+
+.grocery-run-cancel-btn {
+  margin-top:1em;
+  margin-bottom:1em;
+}
+
+.grocery-run-grid {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: solid 1px;
+  padding-left: .25em;
+  padding-right: .25em;
+  padding-bottom: 1em;  
+}
+
+/****************************************
+  SETTINGS
+***************************************/
+
+.settings-section {
+  border-radius: 4px;
+  border: solid 2px white;
+}
+
+.settings-intro {
+  border-radius: 4px;
+  border: solid 1px;
+  padding:.25em;
+}
+
 .settings-form {
   padding-left: 1em;
   padding-right: 1em;
   margin-top: 1em;
   margin-bottom: 1em;
   border-radius: 4px;
-}
-
-.settings-form legend {
-  background: #35324F;
-  border-radius: 4px;
-  color: white;
-  padding-left: .25em;
 }
 
 .settings-form span {
@@ -152,9 +288,15 @@ main {
 .settings-save-btn {
   margin-top:1em;
   margin-bottom:1em;
+  float:right;
+  background-color: green;
 }
 
-/* settings info section */
+.settings-cancel-btn {
+  margin-top:1em;
+  margin-bottom:1em;
+}
+
 .settings-info {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -180,9 +322,9 @@ main {
 }
 
 .settings-info-earth-img {
-    float:right;
-    border-radius: 4px;
-    padding:.5em;
+  float:right;
+  border-radius: 4px;
+  padding:.5em;
 }
 
 .settings-info-text {
@@ -193,31 +335,15 @@ main {
   padding-left: .25em
 }
 
-.clear-all {
-  clear:both;
-}
 
-.flash_message {
-  width:35%;
-  margin-right:auto;
-  margin-left:auto;
-  display:block;
-  text-align:center;
-  padding:5px;
-  border-radius: 5px;
-  background-color:#D66100;
-  color:white;
-}
-
-
-/* 11.24.2015 */
-
-
+/****************************************
+  LOGIN
+***************************************/
 .login-form {
-      width: 50%;
-    margin: auto;
-        background: gray;
-        margin-bottom: 2em;
+  width: 50%;
+  margin: auto;
+  background: gray;
+  margin-bottom: 2em;
 }
 
 .login-logo {
@@ -227,6 +353,7 @@ main {
     padding-top: 1em;
     padding-bottom: 1em;
 }
+
 .login-heading {
     font-size: 40px;
     line-height: 1em;
@@ -246,29 +373,18 @@ main {
   clear: both;
 }
 
+/****************************************
+  REGISTRATION 
+***************************************/
 .register-submit {
-      margin-bottom: 15px;
-      float:right;
-}
-
-.carton-reverse-img {
-    background-image: url(/img/cartonReverse.svg);
-    height:300px;
-    background-size: 75%;
-    background-repeat: no-repeat;
-    margin-top: 2em;
-}
-.peeps-img {
-  background-image: url(/img/peeps.svg);
-  height:100px;
-  background-repeat: no-repeat;
-  float:left;
+  margin-bottom: 15px;
+  float:right;
 }
 
 .registration-intro {
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
 }
 
 .registration-intro-button {
@@ -280,66 +396,48 @@ main {
   width:125px;
 }
 
-.meal-count-form {
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  border-radius: 4px;
+/****************************************
+  HOME 
+***************************************/
+.carton-reverse-img {
+  background-image: url(/img/cartonReverse.svg);
+  height:300px;
+  background-size: 75%;
+  background-repeat: no-repeat;
+  margin-top: 2em;
+}
+.peeps-img {
+  background-image: url(/img/peeps.svg);
+  height:100px;
+  background-repeat: no-repeat;
+  float:left;
 }
 
-.meal-count-form legend {
-  background: #35324F;
-  border-radius: 4px;
-  color: white;
-  padding-left: .25em;
-}
-
-.meal-count-form span {
-  font-style: italic;
-}
-
-.meal-count-save-btn {
-  margin-top:1em;
-  margin-bottom:1em;
-}
-
-.meal-count-input {
-      width: 60px;
-}
-
-/*.grocery-run-date-select {
-      width:150px;
-}*/
-
-
-
-.grocery-run-form {
-  background-color: gray;
-}
-
-/*  METRICS PAGE  */
+/****************************************
+  METRICS 
+***************************************/
 
 .player-metrics-section {
-border: solid .5px;
-border-radius: 4px;
-background-color:#A1BFCB;
-padding-left: 0.5em;
-padding-right: 0.5em;
+  border: solid .5px;
+  border-radius: 4px;
+  background-color:#A1BFCB;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: .15em;
 }
 
 .all-time-save {
-border: solid .5px;
-border-radius: 4px;
-text-align: center;
-background-color: #DAE5FE; /*light purple*/
+  border: solid .5px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #DAE5FE; /*light purple*/
 }
 
 .all-time-grocery-spend {
-border: solid .5px;
-border-radius: 4px;
-text-align: center;
-background-color: #DEA95F;  /*orange*/
+  border: solid .5px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #DEA95F;  /*orange*/
 }
 
 .player-metrics-section p {
@@ -347,18 +445,19 @@ background-color: #DEA95F;  /*orange*/
 }
 
 .all-time-profit {
-border:  black solid .5px;
-border-radius: 4px;
-text-align: center;
-background-color: #CADDBF;  /*light green*/
+  border:  black solid .5px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #CADDBF;  /*light green*/
 }
 
 .lmg-metrics-section {
-border: solid .5px;
-border-radius: 4px;
-background-color:#FAFDDB;
-padding-left: 0.5em;
-padding-right: 0.5em;
+  border: solid .5px;
+  border-radius: 4px;
+  background-color:#FAFDDB;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: .15em;
 }
 
 .lmg-metrics-section p {

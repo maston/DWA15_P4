@@ -10,12 +10,6 @@ use LMG\Http\Controllers\Controller;
 class Settings extends Controller
 {
 
-        /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function getSettings()
     {
         $user_info = \Auth::user();
@@ -36,17 +30,20 @@ class Settings extends Controller
             ->with('game_total_save', $game_total_save); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function postSettings(Request $request)
     {
-
          // Validation
+        $this->validate(
+            $request,
+            [
+                'bfast_spend' => 'required|numeric|between:.50,99.99',
+                'lunch_spend' => 'required|numeric|between:.50,99.99',
+                'dinner_spend' => 'required|numeric|between:.50,99.99',
+                'coffee_spend' => 'required|numeric|between:.50,99.99',
+                'zipcode' => 'required|digits:5'
+            ]
+        );
+
         $user_info = \Auth::user();
         $user_info->bfast_spend = $request->bfast_spend;
         $user_info->lunch_spend = $request->lunch_spend;

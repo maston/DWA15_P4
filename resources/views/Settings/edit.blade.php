@@ -10,58 +10,63 @@
 
 @section('content')
 <!-- start main content section -->
-<!-- settings form section  -->
 <div class="col-md-6">
-  <form class="settings-form" method="POST" action="/settings">
-    {!! csrf_field() !!}
-    <fieldset>
-    	<legend>Settings :: Average Spend (in dollars)</legend>
-      <div class="form-group">
-        <label for="bfast_spend">Breakfast :</label>
-        <div class="input-group">
-          <div class="input-group-addon">$</div>
-          <input type="number" class="form-control spend-input" name="bfast_spend" id="bfast_spend" placeholder="Amount" value="{{ old('bfast_spend',$user_info['bfast_spend']) }}">
+  <h3>Settings</h3> 
+  <p class="settings-intro">Enter the amount for each meal that you would spend if you order it from/at a restaurant.</p>
+  <div class="settings-section">
+    <form class="settings-form" method="POST" action="/settings">
+      {!! csrf_field() !!}
+      <fieldset>
+        @include('partials.errors')
+        <div class="col-md-12 form-group">
+          <label for="bfast_spend" class="col-md-6">Breakfast :</label>
+          <div class="col-md-6 input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number" step="any" class="form-control spend-input" name="bfast_spend" id="bfast_spend"  placeholder="Amount" value="{{ old('bfast_spend',$user_info['bfast_spend']) }}">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label  for="lunch_spend">Lunch :</label>
-        <div class="input-group">
-          <div class="input-group-addon">$</div>
-          <input type="number" class="form-control spend-input" name="lunch_spend" id="lunch_spend" placeholder="Amount" value="{{ old('lunch_spend',$user_info['lunch_spend']) }}">
+        <div class="col-md-12 form-group">
+          <label  for="lunch_spend"  class="col-md-6">Lunch :</label>
+          <div class="col-md-6 input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number" step="any" class="form-control spend-input" name="lunch_spend" id="lunch_spend"  placeholder="Amount" value="{{ old('lunch_spend',$user_info['lunch_spend']) }}">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label  for="dinner_spend">Dinner :</label>
-        <div class="input-group">
-          <div class="input-group-addon">$</div>
-          <input type="number" class="form-control spend-input" name="dinner_spend" id="dinner_spend" placeholder="Amount" value="{{ old('dinner_spend',$user_info['dinner_spend']) }}">
+        <div class="col-md-12 form-group">
+          <label  for="dinner_spend"  class="col-md-6">Dinner :</label>
+          <div class="col-md-6 input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number" step="any" class="form-control spend-input" name="dinner_spend" id="dinner_spend"  placeholder="Amount" value="{{ old('dinner_spend',$user_info['dinner_spend']) }}">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label  for="coffee_spend">Coffee :</label>
-        <div class="input-group">
-          <div class="input-group-addon">$</div>
-          <input type="number" class="form-control spend-input" name="coffee_spend" id="coffee_spend" placeholder="Amount" value="{{ old('coffee_spend',$user_info['coffee_spend']) }}">
+        <div class="col-md-12 form-group">
+          <label  for="coffee_spend" class="col-md-6">Coffee :</label>
+          <div class="col-md-6 input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number" step="any" class="form-control spend-input" name="coffee_spend" id="coffee_spend" placeholder="Amount" value="{{ old('coffee_spend',$user_info['coffee_spend']) }}">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="zipcode">Zipcode <span>(optional)</span>:</label>
-        <div class="input-group">
-          <input type="text" name="zipcode" id="zipcode" class="form-control spend-input" value="{{ old('zipcode',$user_info['zipcode']) }}"> 
+        <div class="col-md-12 form-group">
+          <label for="zipcode" class="col-md-6">Zipcode <span>(optional)</span>:</label>
+          <div class="col-md-6 input-group">
+            <input type="text" name="zipcode" id="zipcode" class="form-control spend-input" value="{{ old('zipcode',$user_info['zipcode']) }}"> 
+          </div>
         </div>
-      </div>
-    </fieldset>
-    <input type="submit" value="Save Settings" class="btn btn-primary settings-save-btn">
-  </form>
+        <a href="/settings"><input type="button" value="Cancel" class="btn btn-primary settings-cancel-btn"></a>
+        <input type="submit" value="Save" class="btn btn-primary settings-save-btn">
+      </fieldset>
+    </form>
+  </div>
 </div>
 <!-- settings instructions section -->
 <div class="col-md-6">
+  <h3>Settings Instructions</h3>
   <div class="settings-info">
-    <h3>Settings Instructions</h3>
+
     <h4 class="settings-info-header">What is "average spend"?</h4>
     <p class="settings-info-text">The average spend is the amount of money you would normal spend on the type of meal by ordering it.<br>
       <span class="settings-info-defaulted">We have defaulted these values and you can adjust them later if you like.<span>
@@ -80,7 +85,7 @@
       bucket, (we will still count your savings towards the national population savings).  <br>
       But should you decide to give us a zipcode we can get you on "<a href="#">the map</a>" and 
       you contribute to the local leaderboards. (coming soon!)</p>
-    </div>
+  </div>
 </div>
 <!-- end main content section -->
 @stop

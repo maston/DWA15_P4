@@ -9,14 +9,11 @@ use LMG\Http\Controllers\Controller;
 
 class Metrics extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user_info = \Auth::user();
+
         //kpi bar totals
         $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".\Auth::id());
         foreach($user_total_saved as $user_tot) {
@@ -60,12 +57,16 @@ class Metrics extends Controller
         $kpi_player_meal_count_detail = \DB::select("select date_format(dt_meal_count, '%M %Y') dt, sum(bfast_ct) tot_bfast_ct, sum(lunch_ct) tot_lunch_ct, sum(dinner_ct) tot_dinner_ct, sum(coffee_ct) tot_coffee_ct,sum(bfast_ct + lunch_ct + dinner_ct + coffee_ct) tot_month_ct from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".\Auth::id()." group by date_format(dt_meal_count, '%M %Y')");
         // Player Save by Type, MM-YYYY
         $kpi_player_save_detail = \DB::select("select date_format(dt_meal_count, '%M %Y') dt, sum(bfast_ct*bfast_spend) tot_bfast_save, sum(lunch_ct*lunch_spend) tot_lunch_save, sum(dinner_ct*dinner_spend) tot_dinner_save, sum(coffee_ct*coffee_spend) tot_coffee_save,sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) tot_month_save from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".\Auth::id()." group by date_format(dt_meal_count, '%M %Y')");
+       // Player grand totals
+        $kpi_player_grand_totals = \DB::select("select sum(bfast_ct*bfast_spend) grand_tot_bfast_save, sum(lunch_ct*lunch_spend) grand_tot_lunch_save, sum(dinner_ct*dinner_spend) grand_tot_dinner_save, sum(coffee_ct*coffee_spend) grand_tot_coffee_save, sum(bfast_ct) grand_tot_bfast_ct, sum(lunch_ct) grand_tot_lunch_ct, sum(dinner_ct) grand_tot_dinner_ct, sum(coffee_ct) grand_tot_coffee_ct, sum(bfast_ct + lunch_ct + dinner_ct + coffee_ct) as grand_tot_ct, sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as grand_tot_save from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".\Auth::id().";");
 
         // LMG Meal Counts detail by Type, MM-YYYY
         $kpi_lmg_meal_count_detail = \DB::select("select date_format(dt_meal_count, '%M %Y') dt, sum(bfast_ct) tot_bfast_ct, sum(lunch_ct) tot_lunch_ct, sum(dinner_ct) tot_dinner_ct, sum(coffee_ct) tot_coffee_ct,sum(bfast_ct + lunch_ct + dinner_ct + coffee_ct) tot_month_ct from meal_count_days m, users u where (m.user_id = u.id) group by date_format(dt_meal_count, '%M %Y')");
-        // Player Save by Type, MM-YYYY
+        // LMG Save by Type, MM-YYYY
         $kpi_lmg_save_detail = \DB::select("select date_format(dt_meal_count, '%M %Y') dt, sum(bfast_ct*bfast_spend) tot_bfast_save, sum(lunch_ct*lunch_spend) tot_lunch_save, sum(dinner_ct*dinner_spend) tot_dinner_save, sum(coffee_ct*coffee_spend) tot_coffee_save,sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) tot_month_save from meal_count_days m, users u where (m.user_id = u.id) group by date_format(dt_meal_count, '%M %Y')");
-       
+        // LMG grand totals
+        $kpi_lmg_grand_totals = \DB::select("select sum(bfast_ct*bfast_spend) grand_tot_bfast_save, sum(lunch_ct*lunch_spend) grand_tot_lunch_save, sum(dinner_ct*dinner_spend) grand_tot_dinner_save, sum(coffee_ct*coffee_spend) grand_tot_coffee_save, sum(bfast_ct) grand_tot_bfast_ct, sum(lunch_ct) grand_tot_lunch_ct, sum(dinner_ct) grand_tot_dinner_ct, sum(coffee_ct) grand_tot_coffee_ct, sum(bfast_ct + lunch_ct + dinner_ct + coffee_ct) as grand_tot_ct, sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as grand_tot_save from meal_count_days m, users u where (m.user_id = u.id);");
+
         return view('Metrics.show')
             ->with('kpi_player_total_save', $kpi_player_total_save)
             ->with('kpi_player_total_food_spend', $kpi_player_total_food_spend)
@@ -75,19 +76,11 @@ class Metrics extends Controller
             ->with('kpi_lmg_total_back_in_pocket', $kpi_lmg_total_back_in_pocket)
             ->with('kpi_player_meal_count_detail', $kpi_player_meal_count_detail)
             ->with('kpi_player_save_detail', $kpi_player_save_detail)
+            ->with('kpi_player_grand_totals', $kpi_player_grand_totals)
             ->with('kpi_lmg_meal_count_detail', $kpi_lmg_meal_count_detail)
             ->with('kpi_lmg_save_detail', $kpi_lmg_save_detail)
+            ->with('kpi_lmg_grand_totals', $kpi_lmg_grand_totals)
             ->with('user_info', $user_info)
-            // ->with('bfast_ct_tot', $bfast_ct_tot)
-            // ->with('lunch_ct_tot', $lunch_ct_tot)
-            // ->with('dinner_ct_tot', $dinner_ct_tot)
-            // ->with('coffee_ct_tot', $coffee_ct_tot)
-            // ->with('bfast_save_tot', $bfast_save_tot)
-            // ->with('lunch_save_tot', $lunch_save_tot)
-            // ->with('dinner_save_tot', $dinner_save_tot)
-            // ->with('coffee_save_tot', $coffee_save_tot)
-            // ->with('grocery_run_grand_tot', $grocery_run_grand_tot)
-            // ->with('meal_count_selected', $meal_count_selected)
             ->with('user_total_save', $user_total_save)
             ->with('game_total_save', $game_total_save); 
     }
