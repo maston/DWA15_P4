@@ -17,19 +17,19 @@
     	<div class="col-md-4">
         	<div class="all-time-save">
         		<h5>All Time Save</h5>
-        		<p>${{$kpi_player_total_save}}</p>
+        		<p>${{number_format($kpi_player_total_save, 2, '.', '')}}</p>
         	</div>
     	</div>
     	<div class="col-md-4">
         	<div class="all-time-grocery-spend">
         		<h5>Spent On Food</h5>
-        		<p>${{$kpi_player_total_food_spend}}</p>
+        		<p>${{number_format($kpi_player_total_food_spend, 2, '.', '')}}</p>
         	</div>
     	</div>
     	<div class="col-md-4">
         	<div class="all-time-profit">
         		<h5>Back In Your Pocket</h5>
-        		<p>${{$kpi_player_total_back_in_pocket}}</p>
+        		<p>${{number_format($kpi_player_total_back_in_pocket, 2, '.', '')}}</p>
         	</div>
     	</div>
         <table class="table table-condensed active">
@@ -103,19 +103,19 @@
     	<div class="col-md-4">
     		<div class="all-time-save">
     			<h5>All Time Save</h5>
-    			<p>${{$kpi_lmg_total_save}}</p>
+    			<p>${{number_format($kpi_lmg_total_save, 2, '.', '')}}</p>
     		</div>
     	</div>
     	<div class="col-md-4">
     		<div class="all-time-grocery-spend">
     			<h5>Grocery Spend</h5>
-    			<p>${{$kpi_lmg_total_food_spend}}</p>
+    			<p>${{number_format($kpi_lmg_total_food_spend, 2, '.', '')}}</p>
     		</div>
     	</div>
     	<div class="col-md-4">
     		<div class="all-time-profit">
     			<h5>Back In Pockets</h5>
-    			<p>${{$kpi_lmg_total_back_in_pocket}}</p>
+    			<p>${{number_format($kpi_lmg_total_back_in_pocket, 2, '.', '')}}</p>
     		</div>
     	</div>
         <table class="table table-condensed active">

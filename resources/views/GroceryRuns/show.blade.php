@@ -52,9 +52,9 @@
                     <div class="col-md-8 input-group">
                     <div class="input-group-addon">$</div>
                         @if($grocery_run_selected)
-                            <input type="number" name="total_amt" id="total_amt" class="form-control grocery-run-input" min="0" value="{{ old('total_amt',$selected_grocery_run['total_amt']) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()"> 
+                            <input type="number" step="any" name="total_amt" id="total_amt" class="form-control grocery-run-input" min="0" value="{{ old('total_amt',$selected_grocery_run['total_amt']) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()"> 
                         @else
-                            <input type="number" name="total_amt" id="total_amt" class="form-control grocery-run-input" min="0" value="{{ old('total_amt',0) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()"> 
+                            <input type="number" step="any" name="total_amt" id="total_amt" class="form-control grocery-run-input" min="0" value="{{ old('total_amt',0) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()"> 
                         @endif 
                     </div>
                 </div>     
@@ -66,9 +66,9 @@
                     <div class="col-md-8 input-group">
                         <div class="input-group-addon">$</div>
                         @if($grocery_run_selected)
-                            <input type="number" name="non_food_amt" id="non_food_amt" class="form-control grocery-run-input"  value="{{ old('non_food_amt',$selected_grocery_run['non_food_amt']) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()"> 
+                            <input type="number" step="any" name="non_food_amt" id="non_food_amt" class="form-control grocery-run-input"  value="{{ old('non_food_amt',$selected_grocery_run['non_food_amt']) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()"> 
                         @else
-                            <input type="number" name="non_food_amt" id="non_food_amt" class="form-control grocery-run-input"  value="{{ old('non_food_amt',0) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()">
+                            <input type="number" step="any" name="non_food_amt" id="non_food_amt" class="form-control grocery-run-input"  value="{{ old('non_food_amt',0) }}" onkeyup="getFoodAmount()" onmouseup="getFoodAmount()">
                         @endif 
                     </div>
                 </div>
@@ -80,9 +80,9 @@
                     <div class="col-md-8  input-group">
                     <div class="input-group-addon">$</div>
                         @if($grocery_run_selected)
-                            <input type="number" name="food_amt" id="food_amt" class="form-control grocery-run-input" value="{{ old('food_amt',$selected_grocery_run['food_amt']) }}" readonly> 
+                            <input type="number" step="any" name="food_amt" id="food_amt" class="form-control grocery-run-input" value="{{ old('food_amt',$selected_grocery_run['food_amt']) }}" readonly> 
                         @else
-                            <input type="number" name="food_amt" id="food_amt" class="form-control grocery-run-input"  value="{{ old('food_amt', 0) }}" readonly> 
+                            <input type="number" step="any" name="food_amt" id="food_amt" class="form-control grocery-run-input"  value="{{ old('food_amt', 0) }}" readonly> 
                         @endif 
                     </div>
                 </div>

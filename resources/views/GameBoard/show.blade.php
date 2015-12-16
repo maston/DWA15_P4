@@ -131,8 +131,8 @@
     @if(isset($selected_grocery_run['dt_grocery_run']))
     <div class="game-board-grocery-run-metrics">
         <p>Grocery Run Date :: {{ $selected_grocery_run['dt_grocery_run'] }} </p>
-        <p class="game-board-spent-on-run">Spent on Grocery Run :: ${{ $selected_grocery_run['food_amt'] }} 
-            <span class="game-board-saved-on-run">Total Saved :: ${{ $grocery_run_grand_tot }} </span>
+        <p class="game-board-spent-on-run">Spent on Grocery Run :: ${{ number_format($selected_grocery_run['food_amt'], 2, '.', '') }} 
+            <span class="game-board-saved-on-run">Total Saved :: ${{ number_format($grocery_run_grand_tot, 2, '.', '') }} </span>
         </p>
     </div>
     <div class="game-board-grid">
@@ -184,20 +184,20 @@
                 @foreach($user_grocery_run->meal_count_day as $meal_count_day)
                 <tr>
                     <td><a href="/game-board/show/meal-count/{{$meal_count_day['id']}}">{{ $meal_count_day['dt_meal_count'] }}</a></td>
-                    <td class="game-board-grid-item">${{ $meal_count_day['bfast_ct'] * $user_info['bfast_spend']}}</td> 
-                    <td class="game-board-grid-item">${{ $meal_count_day['lunch_ct'] * $user_info['lunch_spend'] }}</td>
-                    <td class="game-board-grid-item">${{ $meal_count_day['dinner_ct'] * $user_info['dinner_spend'] }}</td>
-                    <td class="game-board-grid-item">${{ $meal_count_day['coffee_ct'] * $user_info['coffee_spend'] }}</td>
+                    <td class="game-board-grid-item">${{ number_format($meal_count_day['bfast_ct'] * $user_info['bfast_spend'], 2, '.', '')}}</td> 
+                    <td class="game-board-grid-item">${{ number_format($meal_count_day['lunch_ct'] * $user_info['lunch_spend'], 2, '.', '') }}</td>
+                    <td class="game-board-grid-item">${{ number_format($meal_count_day['dinner_ct'] * $user_info['dinner_spend'], 2, '.', '') }}</td>
+                    <td class="game-board-grid-item">${{ number_format($meal_count_day['coffee_ct'] * $user_info['coffee_spend'], 2, '.', '') }}</td>
                 </tr>
                 @endforeach
               @endif
             @endforeach
             <tr  class="success">
                 <td>Totals</td>
-                <td class="game-board-grid-item">${{ $bfast_save_tot }}</td>
-                <td class="game-board-grid-item">${{ $lunch_save_tot }}</td>
-                <td class="game-board-grid-item">${{ $dinner_save_tot }}</td>
-                <td class="game-board-grid-item">${{ $coffee_save_tot }}</td>
+                <td class="game-board-grid-item">${{ number_format($bfast_save_tot, 2, '.', '') }}</td>
+                <td class="game-board-grid-item">${{ number_format($lunch_save_tot, 2, '.', '') }}</td>
+                <td class="game-board-grid-item">${{ number_format($dinner_save_tot, 2, '.', '') }}</td>
+                <td class="game-board-grid-item">${{ number_format($coffee_save_tot , 2, '.', '')}}</td>
             </tr>
         </table>
     </div>

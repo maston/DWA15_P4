@@ -59,9 +59,9 @@ class GroceryRuns extends Controller
             $request,
             [
                 'dt_grocery_run' => 'required|unique:grocery_runs,dt_grocery_run|date',
-                'total_amt' => 'required|numeric|min:1',
-                'non_food_amt' => 'required|numeric|min:0',
-                'food_amt' => 'required|numeric|min:1'
+                'total_amt' => 'required|numeric|between:.50,599.99',
+                'non_food_amt' => 'required|numeric|between:0,99.99',
+                'food_amt' => 'required|numeric|between:.50,99.99'
               ]
         );
 

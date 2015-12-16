@@ -91,6 +91,53 @@ ul.errors {
 }
 
 /****************************************
+  HOME 
+***************************************/
+.home-intro-incentives {
+  margin: auto;
+  width: 75%;
+}
+
+.home-intro-who {
+  border-radius: 4px;
+  border: solid 1px;
+  padding-left: .5em;
+  padding-right: .5em;
+  width: 75%;
+  margin: auto;
+}
+
+.home-buttons {
+  padding-left: 100px;
+}
+
+.home-register-button {
+  width: 100px;
+  background-color: blue;
+  margin: 2em;
+}
+
+.home-login-button {
+  width: 100px;
+  background-color: green;
+  margin: 2em;
+}
+
+.carton-reverse-img {
+  background-image: url(/img/cartonReverse.svg);
+  height:300px;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  margin-top: 2em;
+}
+.peeps-img {
+  background-image: url(/img/peeps.svg);
+  height:100px;
+  background-repeat: no-repeat;
+  float:left;
+}
+
+/****************************************
   GAMEBOARD 
 ***************************************/
 
@@ -416,23 +463,6 @@ ul.errors {
 
 .input-group .form-control  {
   width:125px;
-}
-
-/****************************************
-  HOME 
-***************************************/
-.carton-reverse-img {
-  background-image: url(/img/cartonReverse.svg);
-  height:300px;
-  background-size: 75%;
-  background-repeat: no-repeat;
-  margin-top: 2em;
-}
-.peeps-img {
-  background-image: url(/img/peeps.svg);
-  height:100px;
-  background-repeat: no-repeat;
-  float:left;
 }
 
 /****************************************
