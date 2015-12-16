@@ -1,7 +1,7 @@
 # LunchMoneyGame
 
 ## Live URL
-<http://p4.maston.xyz/>
+<http://beta.lunchmoneygame.com/>
 
 ## Demo
 tbd
