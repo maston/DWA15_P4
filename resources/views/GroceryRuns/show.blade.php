@@ -16,9 +16,7 @@
     <div class="grocery-run-section">
         @if($grocery_run_selected)
             <h4>Update Grocery Run
-                <a href="/grocery-runs/delete/{{$selected_grocery_run['id']}}">
-                    <input type="button" value="Delete" id="grocery-run-delete-button" class="btn btn-primary btn-sm grocery-run-delete-button">
-                </a>
+                <input type="button" value="Delete" id="grocery-run-delete-button" class="btn btn-primary btn-sm grocery-run-delete-button" onclick="window.location='/grocery-runs/delete/{{$selected_grocery_run['id']}}';">
             </h4>
         @else
             <h4>Add New Grocery Run</h4>
@@ -92,7 +90,7 @@
             @else
                 <input type="submit" value="Save" id="grocery-run-submit-button" class="btn btn-primary btn-sm grocery-run-save-btn">
             @endif
-                <a href="/grocery-runs"><input type="button" value="Cancel" id="grocery-run-cancel-button" class="btn btn-primary btn-sm grocery-run-cancel-btn"/></a>
+                <input type="button" value="Cancel" id="grocery-run-cancel-button" class="btn btn-primary btn-sm grocery-run-cancel-btn" onclick="window.location='/grocery-runs';"/>
         </form>
     </div>
 </div>
@@ -107,7 +105,7 @@
     <div class="grocery-run-grid">
         <table  class="table table-condensed active table-hover">
             <caption>Your Grocery Runs
-                <a href="/grocery-runs/"><input type="button" value="Add New" class="btn btn-primary btn-sm grocery-run-add-btn"/></a>
+                <input type="button" value="Add New" class="btn btn-primary btn-sm grocery-run-add-btn" onclick="window.location='/grocery-runs';"/>
             </caption>
             <tr class="active">
                 <th>Date (click date to edit)</th>

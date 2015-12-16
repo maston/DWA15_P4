@@ -56,7 +56,7 @@
             <input type="text" name="zipcode" id="zipcode" class="form-control spend-input" value="{{ old('zipcode',$user_info['zipcode']) }}"> 
           </div>
         </div>
-        <a href="/settings"><input type="button" value="Cancel" class="btn btn-primary settings-cancel-btn"></a>
+        <input type="button" value="Cancel" class="btn btn-primary settings-cancel-btn" onclick="window.location='/my/settings';">
         <input type="submit" value="Save" class="btn btn-primary settings-save-btn">
       </fieldset>
     </form>

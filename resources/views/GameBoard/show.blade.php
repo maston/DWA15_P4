@@ -16,9 +16,9 @@
 
     <div class="game-board-section-mc">
         <h4>Select Grocery Run
-            <a href="/grocery-runs" class="game-board-add-grocery-run">
-                <input type="button" value="Add New" id="" class="btn btn-primary btn-sm">
-            </a>
+        <div class="game-board-add-grocery-run">
+                <input type="button" value="Add New" id="" class="btn btn-primary btn-sm" onclick="window.location='/grocery-runs';">
+        </div>
         </h4>
         @if($meal_count_selected)
         <!-- Meal Count Selected -->
@@ -120,7 +120,7 @@
         @else
             <input type="submit" value="Save" id="gameboard-add-button" class="btn btn-primary btn-sm game-board-add-button" onclick="getChkSum()">
         @endif 
-        <a href="/game-board"><input type="button" value="Cancel" id="gameboard-cancel-button" class="btn btn-primary btn-sm"></a>
+        <input type="button" value="Cancel" id="gameboard-cancel-button" class="btn btn-primary btn-sm" onclick="window.location='/game-board';">
         <input type='hidden' value="0" name='one_meal_count_entered' id='one_meal_count_entered'> 
     @endif
     </form>
@@ -138,9 +138,7 @@
     <div class="game-board-grid">
         <table class="table table-condensed active">
             <caption>Meal Counts For This Grocery Run
-                <a href="/game-board/show/meal-count/new/{{ $selected_grocery_run['id'] }}">
-                    <input type="button" value="Add New" id="gameboard-add-button" class="btn btn-primary btn-sm game-board-add-button">
-                </a>
+                    <input type="button" value="Add New" id="gameboard-add-button" class="btn btn-primary btn-sm game-board-add-button" onclick="window.location='/game-board/show/meal-count/new/{{ $selected_grocery_run['id'] }}';">
             </caption>
             <tr  class="active">
                 <th>Date of Meal (click to edit)</th>
