@@ -138,6 +138,44 @@ ul.errors {
 }
 
 /****************************************
+  INSTRUCTIONS 
+***************************************/
+
+.instruction-intro {
+  border-radius: 4px;
+  border: solid 1px;
+  padding:1em;
+  margin-top:.25em;
+  margin-bottom: .25em;
+}
+
+.instruction-intro h2 {
+  margin:0;
+}
+
+.instructions-buttons {
+  border-radius: 4px;
+  border: solid 1px;
+  background-color: white;
+  width:100%;
+  padding:.25em;
+}
+
+.instructions-settings-button {
+  width: 150px;
+  background-color: orange;
+  margin: 2em;
+}
+
+.instructions-gameboard-button {
+  width: 150px;
+  background-color: green;
+  margin: 2em;
+  float:right;
+}
+
+
+/****************************************
   GAMEBOARD 
 ***************************************/
 

@@ -32,6 +32,9 @@ Route::post('/register', 'Auth\AuthController@postRegister');
 
 // Route Group
 Route::group(['middleware' => 'auth'], function() {
+    //Instructions Route
+    Route::get('/instructions', 'Instructions@index');
+
     //Settings Routes
     Route::get('/settings', 'Settings@getSettings');
     Route::post('/settings', 'Settings@postSettings');

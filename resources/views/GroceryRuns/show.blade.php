@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('nav')
-    @include('partials.nav', [$nav_gameboard = '', $nav_grocery_run = 'active', $nav_metrics = '', $nav_settings = '', $nav_register = '', $nav_login = ''])
+    @include('partials.nav', [$nav_gameboard = '', $nav_grocery_run = 'active', $nav_metrics = '', $nav_instructions = '', $nav_settings = '', $nav_register = '', $nav_login = ''])
 @stop
 
 @section('kpi-bar')
