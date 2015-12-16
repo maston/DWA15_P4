@@ -27,10 +27,10 @@
 		</ul>
 		@else
 		<ul class="nav navbar-nav navbar-right">
-			<li class= {{ $nav_register }} >
+			<li class= "{{ $nav_register }}" >
 				<a href="/register"><span class="glyphicon glyphicon-pencil"></span>  Register</a>
 			</li>
-			<li class= {{ $nav_login }} >
+			<li class= "{{ $nav_login }}" >
 				<a href="/login"><span class="glyphicon"></span>Login</a>
 			</li>
 		</ul>
