@@ -116,11 +116,11 @@
         </div>
     </div>
         @if($meal_count_selected)
-            <input type="submit" value="Update" id="gameboard-update-button" class="btn btn-primary btn-sm game-board-add-button" onclick="getChkSum()">
+            <input type="submit" value="Update" id="mealcount-update-button" class="btn btn-primary btn-sm game-board-add-button" onclick="getChkSum()">
         @else
-            <input type="submit" value="Save" id="gameboard-add-button" class="btn btn-primary btn-sm game-board-add-button" onclick="getChkSum()">
+            <input type="submit" value="Save" id="mealcount-add-button" class="btn btn-primary btn-sm game-board-add-button" onclick="getChkSum()">
         @endif 
-        <input type="button" value="Cancel" id="gameboard-cancel-button" class="btn btn-primary btn-sm" onclick="window.location='/game-board';">
+        <input type="button" value="Cancel" id="mealcount-cancel-button" class="btn btn-primary btn-sm" onclick="window.location='/game-board';">
         <input type='hidden' value="0" name='one_meal_count_entered' id='one_meal_count_entered'> 
     @endif
     </form>
