@@ -16,9 +16,9 @@
 
     <div class="game-board-section-mc">
         <h4>Select Grocery Run
-        <div class="game-board-add-grocery-run">
+        <span class="game-board-add-grocery-run">
                 <input type="button" value="Add New" id="" class="btn btn-primary btn-sm" onclick="window.location='/grocery-runs';">
-        </div>
+        </span>
         </h4>
         @if($meal_count_selected)
         <!-- Meal Count Selected -->
@@ -46,7 +46,7 @@
         <div class='form-group'>
             @if($meal_count_selected)
                 <h4 id="meal-count-form-title">Update Meal Count Day
-                    <a href="/game-board/show/meal-count/delete/{{$selected_meal_count_day['id']}}"><input type="button" value="Delete" id="gameboard-delete-button" class="btn btn-primary btn-sm game-board-delete-button"></a>
+                    <input type="button" value="Delete" id="gameboard-delete-button" class="btn btn-primary btn-sm game-board-delete-button" onclick="window.location='/game-board/show/meal-count/delete/{{$selected_meal_count_day['id']}}';">
                 </h4>
             @else
                 <h4 id="meal-count-form-title">Add Meal Count Day</h4>
