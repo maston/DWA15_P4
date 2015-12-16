@@ -43,6 +43,11 @@ pwd: helloworld
 user: jamal@harvard.edu
 pwd: helloworld
 
+## Known Issues
+A user can add duplicate Grocery Runs.  This is not desired.
+When using the "unique" validation on grocery run dates, it was blocking other users from making a grocery run on the same date.
+Need a composite key uniqueness constraint.
+
 ## Outside Code & Resources
 
 ### Packages included in project

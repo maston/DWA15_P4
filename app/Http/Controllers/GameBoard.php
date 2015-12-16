@@ -279,7 +279,8 @@ class GameBoard extends Controller
             $request,
             [   
                 'one_meal_count_entered' => 'required|numeric|min:1',
-                'dt_meal_count' => 'required|unique:meal_count_days,dt_meal_count|date',
+                // 'dt_meal_count' => 'required|unique:meal_count_days,dt_meal_count|date',
+                'dt_meal_count' => 'required|date',
                 'bfast_ct' => 'required|numeric|min:0',
                 'lunch_ct' => 'required|numeric|min:0',
                 'dinner_ct' => 'required|numeric|min:0',
