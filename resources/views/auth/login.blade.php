@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-<img src="img/logo-sm.png" class="login-logo">
+<img src="img/logo-sm.png" class="login-logo" alt="lunchmoneygame logo">
 
 <div class='panel login-form'>
     <div class="panel-heading login-heading">Login</div>
