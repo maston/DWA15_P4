@@ -10,6 +10,12 @@ use LMG\Http\Controllers\Controller;
 class Metrics extends Controller
 {
 
+// ****************************
+// function: index
+// type: GET
+// param: none
+// summary: Produces the game metrics
+// ****************************
     public function index()
     {
         $user_info = \Auth::user();

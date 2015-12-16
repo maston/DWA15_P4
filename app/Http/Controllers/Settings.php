@@ -10,6 +10,13 @@ use LMG\Http\Controllers\Controller;
 class Settings extends Controller
 {
 
+// ****************************
+// function: getSettings
+// type: GET
+// param: none
+// summary: Displays user settings.
+// ****************************
+
     public function getSettings()
     {
         $user_info = \Auth::user();
@@ -29,6 +36,13 @@ class Settings extends Controller
             ->with('user_total_save', $user_total_save)
             ->with('game_total_save', $game_total_save); 
     }
+
+// ****************************
+// function: postSettings
+// type: POST
+// param: none
+// summary: Updates user settings.
+// ****************************
 
     public function postSettings(Request $request)
     {

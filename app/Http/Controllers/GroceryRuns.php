@@ -9,6 +9,15 @@ use LMG\Http\Controllers\Controller;
 
 class GroceryRuns extends Controller
 {
+
+// ****************************
+// function: getGroceryRun
+// type: GET
+// param: $id - grocery run id
+// summary: If $id is set the selected grocery run loads to view for editing.
+//          If not, view is ready for a new grocery run to be added.
+// ****************************
+
     public function getGroceryRun($id = null)
     {
         $user_info = \Auth::user();
@@ -36,14 +45,22 @@ class GroceryRuns extends Controller
             ->with('game_total_save', $game_total_save); 
     }
 
+// ****************************
+// function: postGroceryRun
+// type: POST
+// param: $id - grocery run id
+// summary: Updates the grocery run.  Evals the request to either 
+//          update or add a Grocery run as appropriate.
+// ****************************
+
     public function postGroceryRun(Request $request)
     {
         $this->validate(
             $request,
             [
-                'dt_grocery_run' => 'required|date',
+                'dt_grocery_run' => 'required|unique:grocery_runs,dt_grocery_run|date',
                 'total_amt' => 'required|numeric|min:1',
-                'non_food_amt' => 'required|numeric|min:1',
+                'non_food_amt' => 'required|numeric|min:0',
                 'food_amt' => 'required|numeric|min:1'
               ]
         );
@@ -74,6 +91,13 @@ class GroceryRuns extends Controller
         }
     }
 
+// ****************************
+// function: getDeleteGroceryRun
+// type: get
+// param: $id - grocery run id
+// summary: Delete grocery run and all the meal count days associated to it
+// ****************************
+    
     public function getDeleteGroceryRun($id) {
 
         $grocery_run = \LMG\GroceryRun::find($id);   

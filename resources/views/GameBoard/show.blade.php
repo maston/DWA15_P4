@@ -23,7 +23,7 @@
         @if($meal_count_selected)
         <!-- Meal Count Selected -->
         <form method='POST' action='/game-board/show/meal-count' id="form-grocery-run-select">
-            <input type='hidden' value='{{ $selected_meal_count_day['id'] }}' name='meal_count_day_id'>
+            <input type='hidden' value='{{ $selected_meal_count_day['id'] }}' name='meal_count_day_id' id='meal_count_day_id'>
         @else
         <!-- No Meal Count -->
         <form method='POST' action='/game-board/show/meal-count/create' id="form-grocery-run-select">
@@ -42,15 +42,14 @@
                 </select>
             <hr>   
         </div>
+        @if(isset($selected_grocery_run['dt_grocery_run']))
         <div class='form-group'>
             @if($meal_count_selected)
-                <h4>Update Meal Count Day
-                <a href="/game-board/show/meal-count/delete/{{$selected_meal_count_day['id']}}">
-                    <input type="button" value="Delete" id="gameboard-delete-button" class="btn btn-primary btn-sm game-board-delete-button">
-                </a>
+                <h4 id="meal-count-form-title">Update Meal Count Day
+                    <a href="/game-board/show/meal-count/delete/{{$selected_meal_count_day['id']}}"><input type="button" value="Delete" id="gameboard-delete-button" class="btn btn-primary btn-sm game-board-delete-button"></a>
                 </h4>
             @else
-                <h4>Add Meal Count Day</h4>
+                <h4 id="meal-count-form-title">Add Meal Count Day</h4>
             @endif
 
         @include('partials.errors')
@@ -123,11 +122,13 @@
         @endif 
         <a href="/game-board"><input type="button" value="Cancel" id="gameboard-cancel-button" class="btn btn-primary btn-sm"></a>
         <input type='hidden' value="0" name='one_meal_count_entered' id='one_meal_count_entered'> 
+    @endif
     </form>
     </div>
 </div>
 <div class="col-md-6">
     <h3>Grocery Run Summary</h3>
+    @if(isset($selected_grocery_run['dt_grocery_run']))
     <div class="game-board-grocery-run-metrics">
         <p>Grocery Run Date :: {{ $selected_grocery_run['dt_grocery_run'] }} </p>
         <p class="game-board-spent-on-run">Spent on Grocery Run :: ${{ $selected_grocery_run['food_amt'] }} 
@@ -137,8 +138,8 @@
     <div class="game-board-grid">
         <table class="table table-condensed active">
             <caption>Meal Counts For This Grocery Run
-                <a href="/metrics">
-                    <input type="button" value="Go to Metrics" id="gameboard-cancel-button" class="btn btn-primary btn-sm game-board-metrics-button">
+                <a href="/game-board/show/meal-count/new/{{ $selected_grocery_run['id'] }}">
+                    <input type="button" value="Add New" id="gameboard-add-button" class="btn btn-primary btn-sm game-board-add-button">
                 </a>
             </caption>
             <tr  class="active">
@@ -200,6 +201,11 @@
             </tr>
         </table>
     </div>
+    @else
+    <div class="game-board-grocery-run-metrics-empty">
+        <h4>No grocery runs added yet!</h4>
+    </div>    
+    @endif
 </div>
 <!-- end main content section -->
 @stop
@@ -290,6 +296,12 @@
         //get selected grocery run's gameboard
         var url = '/game-board/show/' + document.getElementById('grocery_run_id').value;
         window.open(url,"_self");
+    }
+
+    function addNewMealCountDay() {
+        document.getElementById('meal_count_day_id').value = '';
+        document.getElementById('meal-count-form-title').innerHTML = 'Add Meal Count Day';
+
     }
 </script>
 

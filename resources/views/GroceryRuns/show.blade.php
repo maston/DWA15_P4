@@ -123,7 +123,13 @@
                     <td>${{ $grocery_run['food_amt'] }}</td>
                 </tr>
             @endforeach
-        </table>    
+            @if($user_grocery_runs->count()==0)
+            <tr class="info grocery-run-grid-noresults">
+                <td colspan="4">No Grocery Runs Entered Yet</td>
+            </tr>
+            @endif
+        </table>  
+
     </div>
 </div>
 <!-- end main content section -->

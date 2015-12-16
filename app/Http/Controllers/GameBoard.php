@@ -9,27 +9,35 @@ use LMG\Http\Controllers\Controller;
 
 class GameBoard extends Controller
 {
+
+// ****************************
+// function: getGameBoard
+// type: GET
+// param: $gr_id - grocery run id
+// summary: gets a gameboard for a selected grocery run.
+//          if no gameboard is selected --> defaults to the most current grocery run.
+//          Meal Counts --> default to add unless there are meal counts for today's date already then update mode.
+// ****************************
      public function getGameBoard($gr_id = null)
     {
+        $bfast_ct_tot = 0;
+        $lunch_ct_tot = 0;
+        $dinner_ct_tot = 0;
+        $coffee_ct_tot = 0;
+        $bfast_save_tot = 0;
+        $lunch_save_tot = 0;
+        $dinner_save_tot = 0;
+        $coffee_save_tot = 0;
         $user_info = \Auth::user();
         $user_grocery_runs = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
         $selected_meal_count_day = [];
         $meal_count_selected= false;
+
         //get dropdown list of grocery run dates
         $grocery_run_for_dropdown = [];
         foreach($user_grocery_runs as $grocery_run) {
             $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
         }
-
-        $bfast_ct_tot = 0;
-        $lunch_ct_tot = 0;
-        $dinner_ct_tot = 0;
-        $coffee_ct_tot = 0;
-
-        $bfast_save_tot = 0;
-        $lunch_save_tot = 0;
-        $dinner_save_tot = 0;
-        $coffee_save_tot = 0;
 
         if(isset($gr_id)) {
             $selected_grocery_run = $user_grocery_runs->find($gr_id);
@@ -60,6 +68,7 @@ class GameBoard extends Controller
         //determine if there are meal counts for default current day
         $now = \Carbon\Carbon::now()->format('Y-m-d');
         $selected_meal_count_day = \LMG\MealCountDay::where('grocery_run_id', '=', $selected_grocery_run['id'])->where('dt_meal_count', '=', $now)->first();
+        
         if(isset($selected_meal_count_day)) {
             $meal_count_selected= true;
         }
@@ -93,6 +102,14 @@ class GameBoard extends Controller
             ->with('user_total_save', $user_total_save)
             ->with('game_total_save', $game_total_save); 
     }
+
+// ****************************
+// function: getMealCount
+// type: GET
+// param: $mc_id - meal count id
+// summary: gets a gameboard for a selected grocery run on a selected meal count day.
+//          the meal count section will be in update mode.
+// ****************************
 
     public function getMealCount($mc_id = null)
     {
@@ -167,6 +184,93 @@ class GameBoard extends Controller
             ->with('game_total_save', $game_total_save);           
     }
 
+// ****************************
+// function: getNewMealCount
+// type: GET
+// param: $mc_id - meal count id
+// summary: gets a gameboard for a selected grocery run for a new meal count day.
+//          
+// ****************************
+
+    public function getNewMealCount($gr_id = null)
+    {
+        $user_info = \Auth::user();
+        $user_grocery_runs = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
+        $selected_meal_count_day = [];
+        $meal_count_selected= false;
+        //get dropdown list of grocery run dates
+        $grocery_run_for_dropdown = [];
+        foreach($user_grocery_runs as $grocery_run) {
+            $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
+        }
+
+        $bfast_ct_tot = 0;
+        $lunch_ct_tot = 0;
+        $dinner_ct_tot = 0;
+        $coffee_ct_tot = 0;
+
+        $bfast_save_tot = 0;
+        $lunch_save_tot = 0;
+        $dinner_save_tot = 0;
+        $coffee_save_tot = 0;
+
+        $selected_grocery_run = $user_grocery_runs->find($gr_id);
+
+        foreach ($user_grocery_runs as $user_grocery_run) {
+          if ($user_grocery_run['id']==$selected_grocery_run['id']) {
+            foreach($user_grocery_run->meal_count_day as $meal_count_day) {
+                $bfast_ct_tot = $bfast_ct_tot + $meal_count_day['bfast_ct'];
+                $lunch_ct_tot = $lunch_ct_tot + $meal_count_day['lunch_ct'];
+                $dinner_ct_tot = $dinner_ct_tot + $meal_count_day['dinner_ct'];
+                $coffee_ct_tot = $coffee_ct_tot + $meal_count_day['coffee_ct'];
+
+                $bfast_save_tot = $bfast_save_tot + ($meal_count_day['bfast_ct'] * $user_info['bfast_spend']);
+                $lunch_save_tot = $lunch_save_tot + ($meal_count_day['lunch_ct'] * $user_info['lunch_spend']);
+                $dinner_save_tot = $dinner_save_tot + ($meal_count_day['dinner_ct'] * $user_info['dinner_spend']);
+                $coffee_save_tot = $coffee_save_tot + ($meal_count_day['coffee_ct'] * $user_info['coffee_spend']);
+
+            }
+          }
+        }
+
+        $grocery_run_grand_tot = $bfast_save_tot + $lunch_save_tot + $dinner_save_tot + $coffee_save_tot;
+
+        //kpi totals
+        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
+        foreach($user_total_saved as $user_tot) {
+            $user_total_save = $user_tot->tot;
+        }
+        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id)");
+        foreach($game_total_saved as $game_tot) {
+            $game_total_save = $game_tot->tot;
+        }
+
+        return view('GameBoard.show')
+            ->with('user_grocery_runs', $user_grocery_runs)
+            ->with('grocery_run_for_dropdown', $grocery_run_for_dropdown)
+            ->with('selected_grocery_run', $selected_grocery_run)
+            ->with('user_info', $user_info)
+            ->with('bfast_ct_tot', $bfast_ct_tot)
+            ->with('lunch_ct_tot', $lunch_ct_tot)
+            ->with('dinner_ct_tot', $dinner_ct_tot)
+            ->with('coffee_ct_tot', $coffee_ct_tot)
+            ->with('bfast_save_tot', $bfast_save_tot)
+            ->with('lunch_save_tot', $lunch_save_tot)
+            ->with('dinner_save_tot', $dinner_save_tot)
+            ->with('coffee_save_tot', $coffee_save_tot)
+            ->with('grocery_run_grand_tot', $grocery_run_grand_tot)
+            ->with('meal_count_selected', $meal_count_selected)
+            ->with('user_total_save', $user_total_save)
+            ->with('game_total_save', $game_total_save);           
+    }
+
+// ****************************
+// function: postMealCount
+// type: POST
+// param: Request $request
+// summary: Updates meal count record.
+// ****************************
+
     public function postMealCount(Request $request) {
         $this->validate(
             $request,
@@ -201,13 +305,20 @@ class GameBoard extends Controller
         return redirect('/game-board/show/'.$request->grocery_run_id);
     }
 
+// ****************************
+// function: postCreateMealCount
+// type: POST
+// param: Request $request
+// summary: Adds meal count record.
+// ****************************
+
     public function postCreateMealCount(Request $request) {
 
         $this->validate(
             $request,
             [   
                 'one_meal_count_entered' => 'required|numeric|min:1',
-                'dt_meal_count' => 'required|date',
+                'dt_meal_count' => 'required|unique:meal_count_days,dt_meal_count|date',
                 'bfast_ct' => 'required|numeric|min:0',
                 'lunch_ct' => 'required|numeric|min:0',
                 'dinner_ct' => 'required|numeric|min:0',
@@ -231,6 +342,13 @@ class GameBoard extends Controller
         \Session::flash('flash_message','Your meal count was added.');
         return redirect('/game-board/show/'.$request->grocery_run_id);
     }
+
+// ****************************
+// function: getDeleteMealCount
+// type: GET
+// param: $id
+// summary: Deletes Meal Count record
+// ****************************
 
     public function getDeleteMealCount($id) {
 
