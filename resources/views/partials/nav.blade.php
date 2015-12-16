@@ -15,10 +15,10 @@
 		  <li class= "{{ $nav_metrics }}" ><a href="/metrics">Metrics</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li class= {{ $nav_instructions }}>
+			<li class= "{{ $nav_instructions }}">
 				<a href="/instructions"> Instructions</a>
 		  	</li>
-			<li class= {{ $nav_settings }}>
+			<li class= "{{ $nav_settings }}">
 				<a href="/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a>
 			</li>
 			<li>

@@ -14,13 +14,10 @@
         <div class="instruction-intro">  
 
             <div class="instructions-buttons">
-                <a href="/settings">
-                    <input type="button" value="Go to Settings" id="instructions-settings-button" class="btn btn-primary btn-sm instructions-settings-button">
-                </a>
+                <input type="button" value="Go to Settings" id="instructions-settings-button" class="btn btn-primary btn-sm instructions-settings-button" onclick="window.location='/my/settings';">
                 <br>
-                <a href="/game-board">
-                    <input type="button" value="Go to Gameboard" id="instructions-gameboard-button" class="btn btn-primary btn-sm instructions-gameboard-button">
-                </a>
+                <input type="button" value="Go to Gameboard" id="instructions-gameboard-button" class="btn btn-primary btn-sm instructions-gameboard-button" onclick="window.location='/game-board';">
+
             </div>      	
             <h3>Introduction</h3> 
             <p>LunchMoneyGame is a tool and process that teaches how to reverse the behaviors around spending money on restaurant food.  Using the relationship with money to influence the relationship with food choices, it is a simple system of self-reward that can reverse downward trends in one’s health.</p>
