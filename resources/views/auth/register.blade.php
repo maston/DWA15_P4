@@ -4,6 +4,10 @@
     @include('partials.nav', [$nav_gameboard = '', $nav_grocery_run = '', $nav_metrics = '', $nav_settings = '', $nav_register = 'active', $nav_login = ''])
 @stop
 
+@section('kpi-bar')
+    @include('partials.kpi-bar')
+@stop
+
 @section('content')
 <img src="img/logo-sm.png" class="login-logo">
 
