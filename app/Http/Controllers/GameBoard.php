@@ -18,6 +18,7 @@ class GameBoard extends Controller
 //          if no gameboard is selected --> defaults to the most current grocery run.
 //          Meal Counts --> default to add unless there are meal counts for today's date already then update mode.
 // ****************************
+
      public function getGameBoard($gr_id = null)
     {
         $bfast_ct_tot = 0;
@@ -34,10 +35,12 @@ class GameBoard extends Controller
         $meal_count_selected= false;
 
         //get dropdown list of grocery run dates
-        $grocery_run_for_dropdown = [];
-        foreach($user_grocery_runs as $grocery_run) {
-            $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
-        }
+        // $grocery_run_for_dropdown = [];
+        // foreach($user_grocery_runs as $grocery_run) {
+        //     $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
+        // }
+        $GroceryRunModel = new \LMG\GroceryRun();
+        $grocery_run_for_dropdown = $GroceryRunModel->getGroceryRunsForDropdown();
 
         if(isset($gr_id)) {
             $selected_grocery_run = $user_grocery_runs->find($gr_id);
@@ -118,10 +121,12 @@ class GameBoard extends Controller
         $selected_meal_count_day = \LMG\MealCountDay::where('id', '=', $mc_id)->first();
         $meal_count_selected= true;
         //get dropdown list of grocery run dates
-        $grocery_run_for_dropdown = [];
-        foreach($user_grocery_runs as $grocery_run) {
-            $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
-        }
+        // $grocery_run_for_dropdown = [];
+        // foreach($user_grocery_runs as $grocery_run) {
+        //     $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
+        // }
+        $GroceryRunModel = new \LMG\GroceryRun();
+        $grocery_run_for_dropdown = $GroceryRunModel->getGroceryRunsForDropdown();
 
         $bfast_ct_tot = 0;
         $lunch_ct_tot = 0;
@@ -199,10 +204,12 @@ class GameBoard extends Controller
         $selected_meal_count_day = [];
         $meal_count_selected= false;
         //get dropdown list of grocery run dates
-        $grocery_run_for_dropdown = [];
-        foreach($user_grocery_runs as $grocery_run) {
-            $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
-        }
+        // $grocery_run_for_dropdown = [];
+        // foreach($user_grocery_runs as $grocery_run) {
+        //     $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
+        // }
+        $GroceryRunModel = new \LMG\GroceryRun();
+        $grocery_run_for_dropdown = $GroceryRunModel->getGroceryRunsForDropdown();
 
         $bfast_ct_tot = 0;
         $lunch_ct_tot = 0;
