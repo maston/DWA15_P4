@@ -69,18 +69,18 @@
 
     <h4 class="settings-info-header">What is "average spend"?</h4>
     <p class="settings-info-text">The average spend is the amount of money you would normal spend on the type of meal by ordering it.<br>
-      <span class="settings-info-defaulted">We have defaulted these values and you can adjust them later if you like.<span>
+      <span class="settings-info-defaulted">We have defaulted these values and you can adjust them later if you like.</span>
     </p> 
 
     <h4 class="settings-info-header">An Example</h4>
-    <img src="/img/take-out.png" class="settings-info-takeout-img">
+    <img src="/img/take-out.png" class="settings-info-takeout-img" alt="Money you are spending on take-out.">
     <p class="settings-info-text">When I order Indian Food or pizza for dinner, and wait 45 minutes for it to show up, it costs me about $20.<br>
       That is my average spend for ordering a meal. <br>
       Coffee at the shop costs me about $2.50 for a medium.  (Though maybe with the lattes it's about $4.)
     </p>
 
     <h4 class="settings-info-header">Hey! Why are you asking me for a zipcode??</h4>
-    <img src="/img/earth.png" class="settings-info-earth-img">
+    <img src="/img/earth.png" class="settings-info-earth-img" alt="Our earth.">
     <p class="settings-info-text">I'll tell you.  We have grouped you by your Zipcode for your "National Team."  You are welcome to be in the anonymous
       bucket, (we will still count your savings towards the national population savings).  <br>
       But should you decide to give us a zipcode we can get you on "<a href="#">the map</a>" and 
