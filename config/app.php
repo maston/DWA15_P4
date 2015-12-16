@@ -144,6 +144,7 @@ return [
         LMG\Providers\AuthServiceProvider::class,
         LMG\Providers\EventServiceProvider::class,
         LMG\Providers\RouteServiceProvider::class,
+        'LMG\Providers\ComposerServiceProvider',
 
     ],
 

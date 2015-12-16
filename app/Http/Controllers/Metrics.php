@@ -17,19 +17,7 @@ class Metrics extends Controller
 // summary: Produces the game metrics
 // ****************************
     public function index()
-    {
-        $user_info = \Auth::user();
-
-        //kpi bar totals
-        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".\Auth::id());
-        foreach($user_total_saved as $user_tot) {
-            $user_total_save = $user_tot->tot;
-        }
-        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) tot from meal_count_days m, users u where (m.user_id = u.id)");
-        foreach($game_total_saved as $game_tot) {
-            $game_total_save = $game_tot->tot;
-        }        
-
+    {     
         // metrics - kpi - player data
         // money saved
         $kpi_player_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) tot_save from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".\Auth::id());
@@ -85,9 +73,7 @@ class Metrics extends Controller
             ->with('kpi_player_grand_totals', $kpi_player_grand_totals)
             ->with('kpi_lmg_meal_count_detail', $kpi_lmg_meal_count_detail)
             ->with('kpi_lmg_save_detail', $kpi_lmg_save_detail)
-            ->with('kpi_lmg_grand_totals', $kpi_lmg_grand_totals)
-            ->with('user_info', $user_info)
-            ->with('user_total_save', $user_total_save)
-            ->with('game_total_save', $game_total_save); 
+            ->with('kpi_lmg_grand_totals', $kpi_lmg_grand_totals);
+
     }
 }

@@ -34,11 +34,6 @@ class GameBoard extends Controller
         $selected_meal_count_day = [];
         $meal_count_selected= false;
 
-        //get dropdown list of grocery run dates
-        // $grocery_run_for_dropdown = [];
-        // foreach($user_grocery_runs as $grocery_run) {
-        //     $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
-        // }
         $GroceryRunModel = new \LMG\GroceryRun();
         $grocery_run_for_dropdown = $GroceryRunModel->getGroceryRunsForDropdown();
 
@@ -74,17 +69,7 @@ class GameBoard extends Controller
         
         if(isset($selected_meal_count_day)) {
             $meal_count_selected= true;
-        }
-
-        //kpi totals
-        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
-        foreach($user_total_saved as $user_tot) {
-            $user_total_save = $user_tot->tot;
-        }
-        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id)");
-        foreach($game_total_saved as $game_tot) {
-            $game_total_save = $game_tot->tot;
-        }        
+        }     
 
         return view('GameBoard.show')
             ->with('user_grocery_runs', $user_grocery_runs)
@@ -101,9 +86,7 @@ class GameBoard extends Controller
             ->with('dinner_save_tot', $dinner_save_tot)
             ->with('coffee_save_tot', $coffee_save_tot)
             ->with('grocery_run_grand_tot', $grocery_run_grand_tot)
-            ->with('meal_count_selected', $meal_count_selected)
-            ->with('user_total_save', $user_total_save)
-            ->with('game_total_save', $game_total_save); 
+            ->with('meal_count_selected', $meal_count_selected);
     }
 
 // ****************************
@@ -120,11 +103,7 @@ class GameBoard extends Controller
         $user_grocery_runs = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
         $selected_meal_count_day = \LMG\MealCountDay::where('id', '=', $mc_id)->first();
         $meal_count_selected= true;
-        //get dropdown list of grocery run dates
-        // $grocery_run_for_dropdown = [];
-        // foreach($user_grocery_runs as $grocery_run) {
-        //     $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
-        // }
+
         $GroceryRunModel = new \LMG\GroceryRun();
         $grocery_run_for_dropdown = $GroceryRunModel->getGroceryRunsForDropdown();
 
@@ -159,16 +138,6 @@ class GameBoard extends Controller
 
         $grocery_run_grand_tot = $bfast_save_tot + $lunch_save_tot + $dinner_save_tot + $coffee_save_tot;
 
-        //kpi totals
-        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
-        foreach($user_total_saved as $user_tot) {
-            $user_total_save = $user_tot->tot;
-        }
-        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id)");
-        foreach($game_total_saved as $game_tot) {
-            $game_total_save = $game_tot->tot;
-        }
-
         return view('GameBoard.show')
             ->with('user_grocery_runs', $user_grocery_runs)
             ->with('grocery_run_for_dropdown', $grocery_run_for_dropdown)
@@ -184,9 +153,9 @@ class GameBoard extends Controller
             ->with('dinner_save_tot', $dinner_save_tot)
             ->with('coffee_save_tot', $coffee_save_tot)
             ->with('grocery_run_grand_tot', $grocery_run_grand_tot)
-            ->with('meal_count_selected', $meal_count_selected)
-            ->with('user_total_save', $user_total_save)
-            ->with('game_total_save', $game_total_save);           
+            ->with('meal_count_selected', $meal_count_selected);
+            // ->with('user_total_save', $user_total_save)
+            // ->with('game_total_save', $game_total_save);           
     }
 
 // ****************************
@@ -203,11 +172,7 @@ class GameBoard extends Controller
         $user_grocery_runs = \LMG\GroceryRun::with('meal_count_day')->orderBy('dt_grocery_run','DESC')->where('user_id', '=', $user_info->id)->get();
         $selected_meal_count_day = [];
         $meal_count_selected= false;
-        //get dropdown list of grocery run dates
-        // $grocery_run_for_dropdown = [];
-        // foreach($user_grocery_runs as $grocery_run) {
-        //     $grocery_run_for_dropdown[$grocery_run->id] = $grocery_run->dt_grocery_run;
-        // }
+
         $GroceryRunModel = new \LMG\GroceryRun();
         $grocery_run_for_dropdown = $GroceryRunModel->getGroceryRunsForDropdown();
 
@@ -242,15 +207,6 @@ class GameBoard extends Controller
 
         $grocery_run_grand_tot = $bfast_save_tot + $lunch_save_tot + $dinner_save_tot + $coffee_save_tot;
 
-        //kpi totals
-        $user_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id) and u.id = ".$user_info->id);
-        foreach($user_total_saved as $user_tot) {
-            $user_total_save = $user_tot->tot;
-        }
-        $game_total_saved = \DB::select("select sum(bfast_ct*bfast_spend + lunch_ct*lunch_spend + dinner_ct*dinner_spend + coffee_ct*coffee_spend) as tot from meal_count_days m, users u where (m.user_id = u.id)");
-        foreach($game_total_saved as $game_tot) {
-            $game_total_save = $game_tot->tot;
-        }
 
         return view('GameBoard.show')
             ->with('user_grocery_runs', $user_grocery_runs)
@@ -266,9 +222,7 @@ class GameBoard extends Controller
             ->with('dinner_save_tot', $dinner_save_tot)
             ->with('coffee_save_tot', $coffee_save_tot)
             ->with('grocery_run_grand_tot', $grocery_run_grand_tot)
-            ->with('meal_count_selected', $meal_count_selected)
-            ->with('user_total_save', $user_total_save)
-            ->with('game_total_save', $game_total_save);           
+            ->with('meal_count_selected', $meal_count_selected);         
     }
 
 // ****************************
