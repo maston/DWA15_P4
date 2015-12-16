@@ -1,27 +1,53 @@
-## Laravel PHP Framework
+# LunchMoneyGame
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Live URL
+<http://p4.maston.xyz/>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Demo
+tbd
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Description
 
-## Official Documentation
+LunchMoneyGame is a tool and process that teaches how to reverse the behaviors around spending money on restaurant food. Using the relationship with money to influence the relationship with food choices, it is a simple system of self-reward that can reverse downward trends in one’s health.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### How it works
 
-## Contributing
+“When I cook at home, I don’t spend $20.” Learning to cook a meal at home puts the money you didn’t spend on take-out or a restaurant back in your pocket. Every cup of coffee you brew at work or home is $2 you didn’t spend at a coffee shop. This adds up. LunchMoneyGame is a tool that collects your points as you perform the behavior of home cooking and counts those actions against a weekly Grocery Run.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Example of Cooking One Meal
 
-## Security Vulnerabilities
+Our user will be cooking a simple meal of “Sausage Pasta” which is a jar of sauce, a pasta, a chicken sausage grilled, and a frozen veggie.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Grocery Run on a Sunday for ingredients = $20
+Dinner on that Sunday for 2 people = 2 LMG dinner points
+Leftovers taken to lunch Monday for 2 people = 2 LMG lunch points
+Coffee brewed on Monday morning and taken in travel mugs = 2 LMG coffee points
+The "average spend" settings for this user are:
 
-### License
+Dinner = $20
+Lunch = $10
+Coffee = $2.50
+The Results for Run
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Dinner (2 * $20) + Lunch (2 * $10) + Coffee (2 * $2.50) = $65 not spent on restaurant food.
+
+If our user repeats this process for a month the total is $260.
+If our user learns to cook more meals… this number starts to go up. 
+LunchMoneyGame keeps track.
+
+## Details for teaching team
+Test Login users:  
+user: jill@harvard.edu
+pwd: helloworld
+
+user: jamal@harvard.edu
+pwd: helloworld
+
+## Outside Code & Resources
+
+### Packages included in project
+none 
+
+### HTML/css/images
+* using HTML 5
+* Bootstrap: http://getbootstrap.com/
