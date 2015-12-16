@@ -17,7 +17,7 @@
     <div class="game-board-section-mc">
         <h4>Select Grocery Run
         <span class="game-board-add-grocery-run">
-                <input type="button" value="Add New" id="" class="btn btn-primary btn-sm" onclick="window.location='/grocery-runs';">
+                <input type="button" value="Add New" id="game-board-add-new-grocery-run-btn" class="btn btn-primary btn-sm" onclick="window.location='/grocery-runs';">
         </span>
         </h4>
         @if($meal_count_selected)
