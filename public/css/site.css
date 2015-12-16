@@ -157,21 +157,19 @@ ul.errors {
   border-radius: 4px;
   border: solid 1px;
   background-color: white;
-  width:100%;
   padding:.25em;
+  float:right;
 }
 
 .instructions-settings-button {
   width: 150px;
   background-color: orange;
-  margin: 2em;
 }
 
 .instructions-gameboard-button {
   width: 150px;
   background-color: green;
-  margin: 2em;
-  float:right;
+  margin-top:1em;
 }
 
 

@@ -8,24 +8,44 @@
 
 @section('content')
 
-<div class="col-md-3 carton-reverse-img"></div>
-<div class="col-md-9 home-copy">
-    <div>
-        <div class="instruction-intro">
-        	<h2>Welcome to LunchMoneyGame</h2>
+<div class="col-md-2 carton-reverse-img"></div>
+<div class="col-md-10 home-copy">
+        <h2>Welcome to LunchMoneyGame!</h2>
+        <div class="instruction-intro">  
+
+            <div class="instructions-buttons">
+                <a href="/settings">
+                    <input type="button" value="Go to Settings" id="instructions-settings-button" class="btn btn-primary btn-sm instructions-settings-button">
+                </a>
+                <br>
+                <a href="/game-board">
+                    <input type="button" value="Go to Gameboard" id="instructions-gameboard-button" class="btn btn-primary btn-sm instructions-gameboard-button">
+                </a>
+            </div>      	
             <h3>Introduction</h3> 
-            <p>The purpose of this game is to teach you to cook at home again.</p>
-            <br>
-            "When I cook at home I don't spend $20."  This was my mantra as I started to play.</p>
-            <p>Conceptually, here is how this works.  You will go grocery shopping.  (I know that's daunting if you haven't 
-            made a list or been inside a store... the coaching section is coming soon!)
-            <br>
-            Once you go grocery shopping you will record the amount you spent on food.
-            <br>
-            Then we do some math on what you saved by cooking at home.
-            <br>
-            That's it.
-            </p>
+            <p>LunchMoneyGame is a tool and process that teaches how to reverse the behaviors around spending money on restaurant food.  Using the relationship with money to influence the relationship with food choices, it is a simple system of self-reward that can reverse downward trends in one’s health.</p>
+            <h4>How it works</h4>
+            <p>“When I cook at home, I don’t spend $20.”  Learning to cook a meal at home puts the money you didn’t spend on take-out or a restaurant back in your pocket.  Every cup of coffee you brew at work or home is $2 you didn’t spend at a coffee shop.  This adds up.  LunchMoneyGame is a tool that collects your points as you perform the behavior of home cooking and counts those actions against a weekly Grocery Run.</p>
+            <h4>Example of Cooking One Meal</h4>
+            <p>Our user will be cooking a simple meal of “Sausage Pasta” which is a jar of sauce, a pasta, a chicken sausage grilled, and a frozen veggie.</p>
+            <ul class="intro-lmg-example">
+                <li>Grocery Run on a Sunday for ingredients = $20</li>
+                <li>Dinner on that Sunday for 2 people = 2 LMG dinner points</li>
+                <li>Leftovers taken to lunch Monday for 2 people = 2 LMG lunch points</li>
+                <li>Coffee brewed on Monday morning and taken in travel mugs = 2 LMG coffee points</li>
+            </ul>
+            <p>The "average spend" settings for this user are:</p>
+            <ul class="intro-lmg-example">
+                <li>Dinner = $20</li>
+                <li>Lunch = $10</li>
+                <li>Coffee = $2.50</li>
+            </ul>
+            <h4>The Results for Run</h4>
+            <p>Dinner (2 * $20) + Lunch (2 * $10) + Coffee (2 * $2.50) = $65 not spent on restaurant food.</p>
+            <p>If our user repeats this process for a month the total is $260.<br>
+               If our user learns to cook more meals… this number starts to go up. <br>
+               LunchMoneyGame keeps track.</p>
+            <h3>FAQ</h3>
             <h4>How do you know what I'm saving?</h4>
             <p>Your "average meal spend" <a href="/settings">settings.</a> You will enter the amount you usually spend ording food or coffee.</p>  
             <h4>How do you calcuate my savings?</h4>
@@ -33,16 +53,6 @@
             <br>
             Don't over think it.</p>
         </div>
-        <div class="instructions-buttons">
-        <h3>Choose your own adventure: </h3>
-            <a href="/settings">
-                <input type="button" value="Go to Settings" id="instructions-settings-button" class="btn btn-primary btn-sm instructions-settings-button">
-            </a>
-            <a href="/game-board">
-                <input type="button" value="Go to Gameboard" id="instructions-gameboard-button" class="btn btn-primary btn-sm instructions-gameboard-button">
-            </a>
-        </div>
-    </div>
 
 </div>
 @stop
