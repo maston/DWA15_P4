@@ -36,8 +36,8 @@
                 <select name='grocery_run_id' id='grocery_run_id' class="form-control grocery-run-date-select" onchange="showSelectedGroceryRun()">
                 @foreach($grocery_run_for_dropdown as $grocery_run_id => $dt_grocery_run)
 
-                    {{ $selected = ($grocery_run_id == $selected_grocery_run['id']) ? 'selected' : '' }}
-                    <option value='{{ $grocery_run_id }}' {{ $selected }}> {{ $dt_grocery_run }} </option>
+ 
+                    <option value='{{ $grocery_run_id }}' {{ ($grocery_run_id == $selected_grocery_run['id']) ? 'selected' : '' }}> {{ $dt_grocery_run }} </option>
                 @endforeach
                 </select>
             <hr>   
