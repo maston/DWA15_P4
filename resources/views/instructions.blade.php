@@ -17,7 +17,7 @@
         <div class="instruction-intro">  
 
             <div class="instructions-buttons">
-                <input type="button" value="Go to Settings" id="instructions-settings-button" class="btn btn-primary btn-sm instructions-settings-button" onclick="window.location='/my/settings';">
+                <input type="button" value="Go to Settings" id="instructions-settings-button" class="btn btn-primary btn-sm instructions-settings-button" onclick="window.location='/settings';">
                 <br>
                 <input type="button" value="Go to Gameboard" id="instructions-gameboard-button" class="btn btn-primary btn-sm instructions-gameboard-button" onclick="window.location='/game-board';">
 
