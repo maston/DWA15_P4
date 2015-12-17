@@ -4,7 +4,7 @@
 <http://beta.lunchmoneygame.com/>
 
 ## Demo
-tbd
+<http://screencast.com/t/ANq4vHtWbV>
 
 ## Description
 
